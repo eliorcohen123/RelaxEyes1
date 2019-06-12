@@ -24,6 +24,9 @@
         <activity
             android:name="com.elior.relaxeyes.TimerActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".WelcomeActivityRegulations"
+            android:screenOrientation="portrait" />
 
         <receiver
             android:name=".MyReceiverAlarm"

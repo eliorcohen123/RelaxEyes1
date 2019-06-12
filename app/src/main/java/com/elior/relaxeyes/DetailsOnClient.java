@@ -4,7 +4,13 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
+import android.support.design.widget.NavigationView;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -12,7 +18,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class DetailsOnClient extends AppCompatActivity {
+public class DetailsOnClient extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private Spinner spinnerAge, spinnerSex, spinnerScreen;
     private Button btn_pass_data;
@@ -23,6 +29,9 @@ public class DetailsOnClient extends AppCompatActivity {
             "86", "87", "88", "89", "90", "91", "92", "93", "94", "95", "96", "97", "98", "99"};
     private String[] sex_arrays = {"מין:", "גבר", "אישה"};
     private String[] screen_arrays = {"מסך:", "פלאפון", "מחשב", "טלוויזיה"};
+    private Toolbar toolbar;
+    private NavigationView navigationView;
+    private DrawerLayout drawer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +41,7 @@ public class DetailsOnClient extends AppCompatActivity {
         initUI();
         initSpinner();
         submitData();
+        myDrawerLayout();
     }
 
     private void initUI() {
@@ -40,6 +50,55 @@ public class DetailsOnClient extends AppCompatActivity {
         spinnerScreen = findViewById(R.id.spinner_screen);
 
         btn_pass_data = findViewById(R.id.pass_data);
+
+        toolbar = findViewById(R.id.toolbar);
+        drawer = findViewById(R.id.drawer_layout);
+        navigationView = findViewById(R.id.nav_view);
+    }
+
+    private void myDrawerLayout() {
+        findViewById(R.id.myButton).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // open right drawer
+
+                if (drawer.isDrawerOpen(GravityCompat.END)) {
+                    drawer.closeDrawer(GravityCompat.END);
+                } else
+                    drawer.openDrawer(GravityCompat.END);
+            }
+        });
+
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        toggle.setDrawerIndicatorEnabled(false);
+        drawer.addDrawerListener(toggle);
+
+        toggle.syncState();
+
+        navigationView.setNavigationItemSelectedListener(this);
+    }
+
+    @SuppressWarnings("StatementWithEmptyBody")
+    @Override
+    public boolean onNavigationItemSelected(MenuItem item) {
+        // Handle navigation view item clicks here.
+        int id = item.getItemId();
+        if (id == R.id.regulations) {
+            Intent intentTutorial = new Intent(DetailsOnClient.this, WelcomeActivityRegulations.class);
+            startActivity(intentTutorial);
+        } else if (id == R.id.shareIntent) {
+            Intent sendIntent = new Intent();
+            sendIntent.setAction(Intent.ACTION_SEND);
+            sendIntent.putExtra(Intent.EXTRA_TEXT,
+                    "היי, אתה מוזמן לבקר באפליקצייה שלי: https://play.google.com/store/apps/details?id=com.elior.relaxeyes");
+            sendIntent.setType("text/plain");
+            startActivity(sendIntent);
+        }
+
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        drawer.closeDrawer(GravityCompat.END);
+        return true;
     }
 
     private void initSpinner() {

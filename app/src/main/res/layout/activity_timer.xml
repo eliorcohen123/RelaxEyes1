@@ -13,8 +13,8 @@
 
         <Button
             android:id="@+id/backAlarm"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:background="@drawable/ic_arrow_back_yellow_24dp"
             android:gravity="center" />
     </LinearLayout>

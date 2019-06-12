@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/options"
+        android:icon="@drawable/ic_dehaze_yellow_dark_24dp"
+        android:title=""
+        app:showAsAction="ifRoom">
+        <menu>
+            <item
+                android:id="@+id/regulations"
+                android:icon="@drawable/ic_priority_high_yellow_dark_24dp"
+                android:title="לתקנון" />
+
+            <item
+                android:id="@+id/shareIntent"
+                android:icon="@drawable/ic_share_lightblue_24dp"
+                android:title="שתף את האפליקציה" />
+        </menu>
+    </item>
+</menu>
