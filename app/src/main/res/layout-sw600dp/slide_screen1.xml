@@ -7,24 +7,25 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
+        android:layout_marginTop="70dp"
         android:gravity="center_horizontal"
         android:orientation="vertical">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:layout_marginBottom="30dp"
+            android:layout_marginTop="50dp"
+            android:layout_marginBottom="50dp"
             android:gravity="center"
-            android:text="משתמש/ת יקר/ה!"
+            android:text="תקנון האפליקציה"
             android:textColor="@android:color/white"
-            android:textSize="30sp"
+            android:textSize="50sp"
             android:textStyle="bold" />
 
         <ImageView
             android:layout_width="wrap_content"
-            android:layout_height="154dp"
-            android:layout_marginBottom="30dp"
+            android:layout_height="204dp"
+            android:layout_marginBottom="50dp"
             android:scaleType="fitXY"
             android:src="@drawable/eye_icon" />
 
@@ -35,9 +36,9 @@
             android:gravity="center"
             android:paddingLeft="@dimen/desc_padding"
             android:paddingRight="@dimen/desc_padding"
-            android:text="אפליקציית 'מנוחת העיניים' הנה בגדר ייעוץ בלבד לשמירת בריאות העיניים ואינה מהווה תחליף לייעוץ עם רופא מומחה.\n\nתיהנו :)"
+            android:text="אפליקציית 'הרגע את העיניים' הנה בגדר ייעוץ בלבד לשמירת בריאות העיניים ואינה מהווה תחליף לייעוץ עם רופא מומחה.\n\nתיהנו :)"
             android:textAlignment="center"
             android:textColor="@android:color/white"
-            android:textSize="20sp" />
+            android:textSize="33sp" />
     </LinearLayout>
 </RelativeLayout>
