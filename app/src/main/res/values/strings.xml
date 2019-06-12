@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name"> </string>
+    <string name="hint_minute">בחר זמן</string>
+    <string name="message_minutes">בבקשה הכנס זמן…</string>
+    <string name="prompt_sex">בחר מין:</string>
+    <string name="prompt_age">בחר גיל:</string>
+    <string name="prompt_screen">בחר סוג מסך:</string>
+    <string name="fill_all_message">נא להגדיר את כל הפרטים…</string>
+    <string name="title_activity_welcome">מסך בית</string>
+    <string name="start">הבנתי</string>
+    <string name="default_notification_channel_id">2</string>
+</resources>

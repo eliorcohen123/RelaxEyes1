@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "951431922923",
+    "firebase_url": "https://relax-eyes.firebaseio.com",
+    "project_id": "relax-eyes",
+    "storage_bucket": "relax-eyes.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:951431922923:android:3dab779892b96e4c",
+        "android_client_info": {
+          "package_name": "com.elior.relaxeyes"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "951431922923-of8vqffqc7akpt310v6hf16pd6le8r42.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyABOZNHIx_KKZrA4CBSUUwK7zTKHU9cNng"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "951431922923-of8vqffqc7akpt310v6hf16pd6le8r42.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
