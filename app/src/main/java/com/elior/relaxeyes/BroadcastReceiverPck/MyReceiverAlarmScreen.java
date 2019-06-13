@@ -13,7 +13,7 @@ import android.support.v4.app.NotificationCompat;
 import com.elior.relaxeyes.R;
 import com.elior.relaxeyes.ScreenThreePck.TimerActivity;
 
-public class MyReceiverAlarm extends BroadcastReceiver {
+public class MyReceiverAlarmScreen extends BroadcastReceiver {
 
     private NotificationManager notificationManager;
 

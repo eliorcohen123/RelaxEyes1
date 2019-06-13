@@ -27,12 +27,9 @@
         <activity
             android:name=".ScreenOnePck.WelcomeActivityRegulations"
             android:screenOrientation="portrait" />
-        <activity
-            android:name=".ScreenThreePck.TimerActivityRest"
-            android:screenOrientation="portrait" />
 
         <receiver
-            android:name=".BroadcastReceiverPck.MyReceiverAlarm"
+            android:name=".BroadcastReceiverPck.MyReceiverAlarmScreen"
             android:enabled="true"
             android:exported="true"
             android:process=":remote" />

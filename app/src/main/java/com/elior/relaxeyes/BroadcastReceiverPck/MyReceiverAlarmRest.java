@@ -11,7 +11,7 @@ import android.os.Build;
 import android.support.v4.app.NotificationCompat;
 
 import com.elior.relaxeyes.R;
-import com.elior.relaxeyes.ScreenThreePck.TimerActivityRest;
+import com.elior.relaxeyes.ScreenThreePck.TimerActivity;
 
 public class MyReceiverAlarmRest extends BroadcastReceiver {
 
@@ -37,7 +37,7 @@ public class MyReceiverAlarmRest extends BroadcastReceiver {
                 notificationManager.createNotificationChannel(mChannel);
             }
             builder = new NotificationCompat.Builder(context, id);
-            intent = new Intent(context, TimerActivityRest.class);
+            intent = new Intent(context, TimerActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
             pendingIntent = PendingIntent.getActivity(context, 3, intent, 0);
             builder.setContentTitle("ריענון עיניים")
@@ -50,7 +50,7 @@ public class MyReceiverAlarmRest extends BroadcastReceiver {
                     .setVibrate(new long[]{100, 200, 300, 400, 500, 400, 300, 200, 400});
         } else {
             builder = new NotificationCompat.Builder(context, id);
-            intent = new Intent(context, TimerActivityRest.class);
+            intent = new Intent(context, TimerActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
             pendingIntent = PendingIntent.getActivity(context, 3, intent, 0);
             builder.setContentTitle("ריענון עיניים")

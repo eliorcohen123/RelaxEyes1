@@ -12,7 +12,7 @@
         android:orientation="vertical">
 
         <Button
-            android:id="@+id/backAlarm"
+            android:id="@+id/backBtnScreen"
             android:layout_width="70dp"
             android:layout_height="70dp"
             android:background="@drawable/ic_arrow_back_yellow_24dp"
@@ -29,7 +29,7 @@
         android:textSize="70sp" />
 
     <ProgressBar
-        android:id="@+id/progressBarCircle"
+        android:id="@+id/progressBarCircleScreen"
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="350dp"
         android:layout_height="350dp"
@@ -42,7 +42,7 @@
         android:rotation="-90" />
 
     <TextView
-        android:id="@+id/textViewTime"
+        android:id="@+id/textViewTimeScreen"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
@@ -50,21 +50,86 @@
         android:textSize="60sp" />
 
     <ImageView
-        android:id="@+id/imageViewReset"
+        android:id="@+id/imageViewResetScreen"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:layout_below="@+id/textViewTime"
+        android:layout_below="@+id/textViewTimeScreen"
         android:layout_centerInParent="true"
         android:layout_marginTop="40dp"
-        android:src="@drawable/icon_reset"
+        android:src="@drawable/icon_reset_screen"
         android:visibility="gone" />
 
     <ImageView
-        android:id="@+id/imageViewStartStop"
+        android:id="@+id/imageViewStartStopScreen"
         android:layout_width="70dp"
         android:layout_height="70dp"
-        android:layout_below="@+id/progressBarCircle"
+        android:layout_below="@+id/progressBarCircleScreen"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
-        android:src="@drawable/icon_start" />
+        android:src="@drawable/icon_start_screen" />
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/backBtnRest"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:background="@drawable/ic_arrow_back_green_24dp"
+            android:gravity="center" />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/titleTimerRest"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="100dp"
+        android:text="זמן מנוחה"
+        android:textColor="@color/colorGreen"
+        android:textSize="70sp" />
+
+    <ProgressBar
+        android:id="@+id/progressBarCircleRest"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="350dp"
+        android:layout_height="350dp"
+        android:layout_centerInParent="true"
+        android:background="@drawable/drawable_circle_dark_blue"
+        android:indeterminate="false"
+        android:max="100"
+        android:progress="100"
+        android:progressDrawable="@drawable/drawable_circle_green"
+        android:rotation="-90" />
+
+    <TextView
+        android:id="@+id/textViewTimeRest"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:textColor="@color/colorGreen"
+        android:textSize="60sp" />
+
+    <ImageView
+        android:id="@+id/imageViewResetRest"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_below="@+id/textViewTimeRest"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="40dp"
+        android:src="@drawable/icon_reset_rest"
+        android:visibility="gone" />
+
+    <ImageView
+        android:id="@+id/imageViewStartStopRest"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_below="@+id/progressBarCircleRest"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/icon_start_rest" />
 </RelativeLayout>
