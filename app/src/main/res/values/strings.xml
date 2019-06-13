@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">מנוחת העיניים</string>
-    <string name="hint_minute">בחר זמן</string>
     <string name="message_minutes">בבקשה הכנס זמן…</string>
     <string name="prompt_sex">בחר מין:</string>
     <string name="prompt_age">בחר גיל:</string>
