@@ -19,7 +19,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.elior.relaxeyes.R;
-import com.elior.relaxeyes.ReceiverPck.MyReceiverAlarm;
+import com.elior.relaxeyes.BroadcastReceiverPck.MyReceiverAlarm;
 
 import java.util.Calendar;
 import java.util.concurrent.TimeUnit;

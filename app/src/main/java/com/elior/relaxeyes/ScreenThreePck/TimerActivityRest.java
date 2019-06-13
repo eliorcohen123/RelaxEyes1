@@ -20,7 +20,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.elior.relaxeyes.R;
-import com.elior.relaxeyes.ReceiverPck.MyReceiverAlarmRest;
+import com.elior.relaxeyes.BroadcastReceiverPck.MyReceiverAlarmRest;
 
 import java.util.Calendar;
 import java.util.concurrent.TimeUnit;

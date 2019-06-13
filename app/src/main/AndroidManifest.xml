@@ -32,12 +32,12 @@
             android:screenOrientation="portrait" />
 
         <receiver
-            android:name=".ReceiverPck.MyReceiverAlarm"
+            android:name=".BroadcastReceiverPck.MyReceiverAlarm"
             android:enabled="true"
             android:exported="true"
             android:process=":remote" />
         <receiver
-            android:name=".ReceiverPck.MyReceiverAlarmRest"
+            android:name=".BroadcastReceiverPck.MyReceiverAlarmRest"
             android:enabled="true"
             android:exported="true"
             android:process=":remote" />

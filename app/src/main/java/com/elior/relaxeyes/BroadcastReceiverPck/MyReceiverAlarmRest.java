@@ -1,4 +1,4 @@
-package com.elior.relaxeyes.ReceiverPck;
+package com.elior.relaxeyes.BroadcastReceiverPck;
 
 import android.app.Notification;
 import android.app.NotificationChannel;
