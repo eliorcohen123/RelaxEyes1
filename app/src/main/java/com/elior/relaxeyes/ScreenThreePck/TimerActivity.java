@@ -173,7 +173,6 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
         if (now.after(alarmStartTime)) {
             alarmStartTime.add(Calendar.DATE, 1);
         }
-        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, alarmStartTime.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingIntent);
 
         ComponentName receiver2 = new ComponentName(TimerActivity.this, MyReceiverAlarm.class);
         PackageManager pm2 = getPackageManager();
