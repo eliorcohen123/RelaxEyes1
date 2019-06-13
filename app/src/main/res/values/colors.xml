@@ -6,6 +6,7 @@
     <color name="colorBackground">#151B29</color>
     <color name="colorYellow">#F5FA55</color>
     <color name="colorYellowDark">#9FA31C</color>
+    <color name="colorGreen">#00cc00</color>
     <array name="array_dot_active">
         <item>@color/colorPrimary</item>
     </array>

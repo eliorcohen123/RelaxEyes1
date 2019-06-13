@@ -24,7 +24,7 @@ import com.elior.relaxeyes.ScreenThreePck.TimerActivity;
 
 public class DetailsOnClient extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-    private Spinner spinnerAge, spinnerSex, spinnerScreen;
+    private Spinner spinnerAge, spinnerSex, spinnerScreen, spinnerRest;
     private Button btn_pass_data;
     private String[] age_arrays = {"גיל:", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19",
             "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41",
@@ -33,6 +33,7 @@ public class DetailsOnClient extends AppCompatActivity implements NavigationView
             "86", "87", "88", "89", "90", "91", "92", "93", "94", "95", "96", "97", "98", "99"};
     private String[] sex_arrays = {"מין:", "גבר", "אישה"};
     private String[] screen_arrays = {"מסך:", "פלאפון", "מחשב", "טלוויזיה"};
+    private String[] rest_arrays = {"דקות:", "1", "2", "3", "4", "5"};
     private Toolbar toolbar;
     private NavigationView navigationView;
     private DrawerLayout drawer;
@@ -52,6 +53,7 @@ public class DetailsOnClient extends AppCompatActivity implements NavigationView
         spinnerAge = findViewById(R.id.spinner_age);
         spinnerSex = findViewById(R.id.spinner_sex);
         spinnerScreen = findViewById(R.id.spinner_screen);
+        spinnerRest = findViewById(R.id.spinner_rest);
 
         btn_pass_data = findViewById(R.id.pass_data);
 
@@ -120,6 +122,11 @@ public class DetailsOnClient extends AppCompatActivity implements NavigationView
         ArrayAdapter<String> spinnerArrayAdapterScreen = new ArrayAdapter<String>(this, R.layout.spinner_item, screen_arrays);
         spinnerArrayAdapterScreen.setDropDownViewResource(R.layout.simple_spinner_dropdown_item); // The drop down view
         spinnerScreen.setAdapter(spinnerArrayAdapterScreen);
+
+        // spinnerRest
+        ArrayAdapter<String> spinnerArrayAdapterRest = new ArrayAdapter<String>(this, R.layout.spinner_item, rest_arrays);
+        spinnerArrayAdapterRest.setDropDownViewResource(R.layout.simple_spinner_dropdown_item); // The drop down view
+        spinnerRest.setAdapter(spinnerArrayAdapterRest);
     }
 
     public void submitData() {
@@ -171,7 +178,30 @@ public class DetailsOnClient extends AppCompatActivity implements NavigationView
 
                 double yourValTotal = 1000.0 * yourValAge * yourValSex * yourValScreen;
 
-                if (spinnerAge.getSelectedItem() == "גיל:" || spinnerSex.getSelectedItem() == "מין:" || spinnerScreen.getSelectedItem() == "מסך:") {
+                int yourValMins = 0;
+                String MinsMy = spinnerRest.getSelectedItem().toString();
+                if (!MinsMy.equals("דקות:")) {
+                    switch (MinsMy) {
+                        case "1":
+                            yourValMins = 1;
+                            break;
+                        case "2":
+                            yourValMins = 2;
+                            break;
+                        case "3":
+                            yourValMins = 3;
+                            break;
+                        case "4":
+                            yourValMins = 4;
+                            break;
+                        case "5":
+                            yourValMins = 5;
+                            break;
+                    }
+                }
+
+                if (spinnerAge.getSelectedItem() == "גיל:" || spinnerSex.getSelectedItem() == "מין:" ||
+                        spinnerScreen.getSelectedItem() == "מסך:" || spinnerRest.getSelectedItem() == "דקות:") {
                     Toast toast = Toast.makeText(DetailsOnClient.this, getString(R.string.fill_all_message), Toast.LENGTH_LONG);
                     View view = toast.getView();
                     view.getBackground().setColorFilter(getResources().getColor(R.color.colorPrimary), PorterDuff.Mode.SRC_IN);
@@ -182,6 +212,10 @@ public class DetailsOnClient extends AppCompatActivity implements NavigationView
                     SharedPreferences.Editor editor = getSharedPreferences("total_val", MODE_PRIVATE).edit();
                     editor.putFloat("total", (float) yourValTotal);
                     editor.apply();
+
+                    SharedPreferences.Editor editorRest = getSharedPreferences("total_mins", MODE_PRIVATE).edit();
+                    editorRest.putInt("mins", yourValMins);
+                    editorRest.apply();
 
                     Intent intent = new Intent(DetailsOnClient.this, TimerActivity.class);
                     startActivity(intent);

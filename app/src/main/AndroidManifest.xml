@@ -10,7 +10,7 @@
         android:supportsRtl="false"
         android:theme="@style/AppTheme">
         <activity
-            android:name="com.elior.relaxeyes.ScreenOnePck.WelcomeActivity"
+            android:name=".ScreenOnePck.WelcomeActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -27,9 +27,17 @@
         <activity
             android:name=".ScreenOnePck.WelcomeActivityRegulations"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".ScreenThreePck.TimerActivityRest"
+            android:screenOrientation="portrait" />
 
         <receiver
-            android:name=".ScreenThreePck.MyReceiverAlarm"
+            android:name=".ReceiverPck.MyReceiverAlarm"
+            android:enabled="true"
+            android:exported="true"
+            android:process=":remote" />
+        <receiver
+            android:name=".ReceiverPck.MyReceiverAlarmRest"
             android:enabled="true"
             android:exported="true"
             android:process=":remote" />

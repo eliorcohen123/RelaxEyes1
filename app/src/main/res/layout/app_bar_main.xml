@@ -103,6 +103,34 @@
             android:textSize="17sp" />
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="30dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <Spinner
+            android:id="@+id/spinner_rest"
+            style="@android:style/Widget.Holo.Light.Spinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="marquee"
+            android:popupBackground="@color/colorPrimary"
+            android:prompt="@string/prompt_screen"
+            android:theme="@style/spinnerTheme" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="בחר דקות מנוחה: "
+            android:textColor="@color/colorYellow"
+            android:textSize="17sp" />
+    </LinearLayout>
+
     <Button
         android:id="@+id/pass_data"
         android:layout_width="100dp"

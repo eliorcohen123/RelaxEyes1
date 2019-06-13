@@ -1,4 +1,4 @@
-package com.elior.relaxeyes.ScreenThreePck;
+package com.elior.relaxeyes.ReceiverPck;
 
 import android.app.Notification;
 import android.app.NotificationChannel;
@@ -46,7 +46,7 @@ public class MyReceiverAlarm extends BroadcastReceiver {
                     .setDefaults(Notification.DEFAULT_ALL)
                     .setAutoCancel(true)
                     .setContentIntent(pendingIntent)
-                    .setTicker("תפילה")
+                    .setTicker("ריענון עיניים")
                     .setVibrate(new long[]{100, 200, 300, 400, 500, 400, 300, 200, 400});
         } else {
             builder = new NotificationCompat.Builder(context, id);
@@ -59,7 +59,7 @@ public class MyReceiverAlarm extends BroadcastReceiver {
                     .setDefaults(Notification.DEFAULT_ALL)
                     .setAutoCancel(true)
                     .setContentIntent(pendingIntent)
-                    .setTicker("תפילה")
+                    .setTicker("ריענון עיניים")
                     .setVibrate(new long[]{100, 200, 300, 400, 500, 400, 300, 200, 400})
                     .setPriority(Notification.PRIORITY_HIGH);
         }
