@@ -1,4 +1,4 @@
-package com.elior.relaxeyes;
+package com.elior.relaxeyes.ScreenThreePck;
 
 import android.app.Notification;
 import android.app.NotificationChannel;
@@ -9,6 +9,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.support.v4.app.NotificationCompat;
+
+import com.elior.relaxeyes.R;
+import com.elior.relaxeyes.ScreenThreePck.TimerActivity;
 
 public class MyReceiverAlarm extends BroadcastReceiver {
 

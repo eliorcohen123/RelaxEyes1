@@ -1,4 +1,4 @@
-package com.elior.relaxeyes;
+package com.elior.relaxeyes.OtherPck;
 
 import java.io.Serializable;
 

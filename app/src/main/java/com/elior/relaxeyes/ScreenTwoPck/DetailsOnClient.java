@@ -1,4 +1,4 @@
-package com.elior.relaxeyes;
+package com.elior.relaxeyes.ScreenTwoPck;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -17,6 +17,10 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.elior.relaxeyes.R;
+import com.elior.relaxeyes.ScreenOnePck.WelcomeActivityRegulations;
+import com.elior.relaxeyes.ScreenThreePck.TimerActivity;
 
 public class DetailsOnClient extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 

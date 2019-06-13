@@ -1,4 +1,4 @@
-package com.elior.relaxeyes;
+package com.elior.relaxeyes.ScreenThreePck;
 
 import android.app.AlarmManager;
 import android.app.NotificationManager;
@@ -17,6 +17,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+
+import com.elior.relaxeyes.R;
 
 import java.util.Calendar;
 import java.util.concurrent.TimeUnit;

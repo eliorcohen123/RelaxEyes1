@@ -10,7 +10,7 @@
         android:supportsRtl="false"
         android:theme="@style/AppTheme">
         <activity
-            android:name="com.elior.relaxeyes.WelcomeActivity"
+            android:name="com.elior.relaxeyes.ScreenOnePck.WelcomeActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -19,22 +19,22 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".DetailsOnClient"
+            android:name=".ScreenTwoPck.DetailsOnClient"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.elior.relaxeyes.TimerActivity"
+            android:name="com.elior.relaxeyes.ScreenThreePck.TimerActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".WelcomeActivityRegulations"
+            android:name=".ScreenOnePck.WelcomeActivityRegulations"
             android:screenOrientation="portrait" />
 
         <receiver
-            android:name=".MyReceiverAlarm"
+            android:name=".ScreenThreePck.MyReceiverAlarm"
             android:enabled="true"
             android:exported="true"
             android:process=":remote" />
 
-        <service android:name=".MyFirebaseMessagingService">
+        <service android:name=".OtherPck.MyFirebaseMessagingService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
