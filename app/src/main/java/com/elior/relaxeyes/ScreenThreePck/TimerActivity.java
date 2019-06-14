@@ -325,11 +325,6 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
         PackageManager pm = getPackageManager();
         pm.setComponentEnabledSetting(receiver, PackageManager.COMPONENT_ENABLED_STATE_DISABLED, PackageManager.DONT_KILL_APP);
 
-        SharedPreferences.Editor editor = getSharedPreferences("textTime", MODE_PRIVATE).edit();
-        editor.putInt("idHour", 0);
-        editor.putInt("idMinute", 0);
-        editor.apply();
-
         Intent alarmIntent = new Intent(TimerActivity.this, MyReceiverAlarmScreen.class); // AlarmReceiver1 = broadcast receiver
         pendingIntentScreen = PendingIntent.getBroadcast(TimerActivity.this, 1, alarmIntent, PendingIntent.FLAG_UPDATE_CURRENT);
         alarmManagerScreen = (AlarmManager) getSystemService(ALARM_SERVICE);
