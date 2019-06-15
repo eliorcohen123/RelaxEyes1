@@ -7,6 +7,7 @@ import android.content.ComponentName;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.graphics.PorterDuff;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -17,10 +18,12 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.elior.relaxeyes.BroadcastReceiverPck.MyReceiverAlarmRest;
 import com.elior.relaxeyes.R;
 import com.elior.relaxeyes.BroadcastReceiverPck.MyReceiverAlarmScreen;
+import com.elior.relaxeyes.ScreenTwoPck.DetailsOnClient;
 
 import java.util.Calendar;
 import java.util.concurrent.TimeUnit;
@@ -43,8 +46,8 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
     private TimerStatusRest timerStatusRest = TimerStatusRest.STOPPED_REST;
 
     private ProgressBar progressBarCircleScreen, progressBarCircleRest;
-    private TextView textViewTimeScreen, textViewTimeRest, titleTimerScreen, titleTimerRest;
-    private ImageView imageViewResetScreen, imageViewResetRest, imageViewStartStopScreen, imageViewStartStopRest;
+    private TextView textViewTimeScreen, textViewTimeRest, titleTimerScreen, titleTimerRest, textViewAlarmTimeScreen, textViewAlarmTimeRest;
+    private ImageView imageViewResetScreen, imageViewResetRest, imageViewStartStopScreen, imageViewStartStopRest, imageStopScreen, imageStopRest;
     private CountDownTimer countDownTimerScreen, countDownTimerRest;
     private PendingIntent pendingIntentScreen, pendingIntentRest;
     private Button backBtnScreen, backBtnRest;
@@ -66,6 +69,8 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
         initListeners();
         showUI();
         myTextValueRest();
+        checkStopScreen();
+        checkStopRest();
     }
 
     private void initUI() {
@@ -75,6 +80,8 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
         imageViewStartStopScreen = findViewById(R.id.imageViewStartStopScreen);
         backBtnScreen = findViewById(R.id.backBtnScreen);
         titleTimerScreen = findViewById(R.id.titleTimerScreen);
+        imageStopScreen = findViewById(R.id.imageStopScreen);
+        textViewAlarmTimeScreen = findViewById(R.id.textViewAlarmTimeScreen);
 
         progressBarCircleRest = findViewById(R.id.progressBarCircleRest);
         textViewTimeRest = findViewById(R.id.textViewTimeRest);
@@ -82,6 +89,8 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
         imageViewStartStopRest = findViewById(R.id.imageViewStartStopRest);
         backBtnRest = findViewById(R.id.backBtnRest);
         titleTimerRest = findViewById(R.id.titleTimerRest);
+        imageStopRest = findViewById(R.id.imageStopRest);
+        textViewAlarmTimeRest = findViewById(R.id.textViewAlarmTimeRest);
     }
 
     private void initListeners() {
@@ -91,6 +100,8 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
         imageViewStartStopRest.setOnClickListener(this);
         backBtnScreen.setOnClickListener(this);
         backBtnRest.setOnClickListener(this);
+        imageStopScreen.setOnClickListener(this);
+        imageStopRest.setOnClickListener(this);
     }
 
     private void showUI() {
@@ -100,6 +111,55 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
         imageViewStartStopRest.setVisibility(View.GONE);
         backBtnRest.setVisibility(View.GONE);
         titleTimerRest.setVisibility(View.GONE);
+        imageStopRest.setVisibility(View.GONE);
+        textViewAlarmTimeRest.setVisibility(View.GONE);
+
+        SharedPreferences prefs = getSharedPreferences("total_mins", MODE_PRIVATE);
+        int idNumRest = prefs.getInt("mins", 0);
+
+        SharedPreferences prefs2 = getSharedPreferences("total_stop_screen_me", MODE_PRIVATE);
+        int idNumScreen = prefs2.getInt("screen_me", 1);
+
+        SharedPreferences prefs3 = getSharedPreferences("total_stop_rest_me", MODE_PRIVATE);
+        int idNumRest2 = prefs3.getInt("rest_me", 1);
+
+        if (idNumRest != 0 && idNumScreen == 900000) {
+            textViewTimeRest.setVisibility(View.VISIBLE);
+            progressBarCircleRest.setVisibility(View.VISIBLE);
+            imageViewStartStopRest.setVisibility(View.VISIBLE);
+            backBtnRest.setVisibility(View.VISIBLE);
+            titleTimerRest.setVisibility(View.VISIBLE);
+            imageStopRest.setVisibility(View.VISIBLE);
+            textViewAlarmTimeRest.setVisibility(View.VISIBLE);
+
+            textViewTimeScreen.setVisibility(View.GONE);
+            imageViewResetScreen.setVisibility(View.GONE);
+            progressBarCircleScreen.setVisibility(View.GONE);
+            imageViewStartStopScreen.setVisibility(View.GONE);
+            backBtnScreen.setVisibility(View.GONE);
+            titleTimerScreen.setVisibility(View.GONE);
+            imageStopScreen.setVisibility(View.GONE);
+            textViewAlarmTimeScreen.setVisibility(View.GONE);
+        }
+
+        if (idNumRest2 == 900000) {
+            textViewTimeRest.setVisibility(View.GONE);
+            imageViewResetRest.setVisibility(View.GONE);
+            progressBarCircleRest.setVisibility(View.GONE);
+            imageViewStartStopRest.setVisibility(View.GONE);
+            backBtnRest.setVisibility(View.GONE);
+            titleTimerRest.setVisibility(View.GONE);
+            imageStopRest.setVisibility(View.GONE);
+            textViewAlarmTimeRest.setVisibility(View.GONE);
+
+            textViewTimeScreen.setVisibility(View.VISIBLE);
+            progressBarCircleScreen.setVisibility(View.VISIBLE);
+            imageViewStartStopScreen.setVisibility(View.VISIBLE);
+            backBtnScreen.setVisibility(View.VISIBLE);
+            titleTimerScreen.setVisibility(View.VISIBLE);
+            imageStopScreen.setVisibility(View.VISIBLE);
+            textViewAlarmTimeScreen.setVisibility(View.VISIBLE);
+        }
     }
 
     @Override
@@ -118,12 +178,50 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
                 startStopRest();
                 break;
             case R.id.backBtnScreen:
+                delData();
+
                 onBackPressed();
                 break;
             case R.id.backBtnRest:
+                delData();
+
+                SharedPreferences.Editor editor2 = getSharedPreferences("total_stop_rest_me", MODE_PRIVATE).edit();
+                editor2.putInt("rest_me", 900000);
+                editor2.apply();
+
+                onBackPressed();
+                break;
+            case R.id.imageStopScreen:
+                imageStopScreen.setVisibility(View.GONE);
+                textViewAlarmTimeScreen.setVisibility(View.GONE);
+
+                delData();
+
+                onBackPressed();
+                break;
+            case R.id.imageStopRest:
+                imageStopRest.setVisibility(View.GONE);
+                textViewAlarmTimeRest.setVisibility(View.GONE);
+
+                delData();
+
+                SharedPreferences.Editor editor3 = getSharedPreferences("total_stop_rest_me", MODE_PRIVATE).edit();
+                editor3.putInt("rest_me", 900000);
+                editor3.apply();
+
                 onBackPressed();
                 break;
         }
+    }
+
+    private void delData() {
+        SharedPreferences.Editor editor = getSharedPreferences("total_stop_screen", MODE_PRIVATE).edit();
+        editor.putInt("screen", 900000);
+        editor.apply();
+
+        SharedPreferences.Editor editor2 = getSharedPreferences("total_stop_rest", MODE_PRIVATE).edit();
+        editor2.putInt("rest", 900000);
+        editor2.apply();
     }
 
     private void resetScreen() {
@@ -139,6 +237,9 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
     }
 
     private void startStopScreen() {
+        imageStopScreen.setVisibility(View.GONE);
+        textViewAlarmTimeScreen.setVisibility(View.GONE);
+
         if (timerStatusScreen == TimerStatusScreen.STOPPED_SCREEN) {
             setTimerValuesScreen();
             setProgressBarValuesScreen();
@@ -156,7 +257,46 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
         }
     }
 
+    private void checkStopScreen() {
+        SharedPreferences prefs = getSharedPreferences("total_stop_screen", MODE_PRIVATE);
+        int idNumStopScreen = prefs.getInt("screen", 900000);
+
+        SharedPreferences prefs2 = getSharedPreferences("total_time_screen", MODE_PRIVATE);
+        int idNumStopScreenHour = prefs2.getInt("time_screen_hour", 0);
+        int idNumStopScreenMin = prefs2.getInt("time_screen_min", 0);
+        int idNumStopScreenSec = prefs2.getInt("time_screen_sec", 0);
+
+        if (idNumStopScreenHour <= 9 && idNumStopScreenMin <= 9 && idNumStopScreenSec <= 9) {
+            textViewAlarmTimeScreen.setText("0" + idNumStopScreenHour + ":0" + idNumStopScreenMin + ":0" + idNumStopScreenSec);
+        } else if (idNumStopScreenHour <= 9 && idNumStopScreenMin <= 9 && idNumStopScreenSec > 9) {
+            textViewAlarmTimeScreen.setText("0" + idNumStopScreenHour + ":0" + idNumStopScreenMin + ":" + idNumStopScreenSec);
+        } else if (idNumStopScreenHour > 9 && idNumStopScreenMin <= 9 && idNumStopScreenSec <= 9) {
+            textViewAlarmTimeScreen.setText(idNumStopScreenHour + ":0" + idNumStopScreenMin + ":0" + idNumStopScreenSec);
+        } else if (idNumStopScreenHour <= 9 && idNumStopScreenMin > 9 && idNumStopScreenSec <= 9) {
+            textViewAlarmTimeScreen.setText("0" + idNumStopScreenHour + ":" + idNumStopScreenMin + ":0" + idNumStopScreenSec);
+        } else if (idNumStopScreenHour > 9 && idNumStopScreenMin > 9 && idNumStopScreenSec <= 9) {
+            textViewAlarmTimeScreen.setText(idNumStopScreenHour + ":" + idNumStopScreenMin + ":0" + idNumStopScreenSec);
+        } else if (idNumStopScreenHour <= 9 && idNumStopScreenMin > 9 && idNumStopScreenSec > 9) {
+            textViewAlarmTimeScreen.setText("0" + idNumStopScreenHour + ":" + idNumStopScreenMin + ":" + idNumStopScreenSec);
+        } else if (idNumStopScreenHour > 9 && idNumStopScreenMin <= 9 && idNumStopScreenSec > 9) {
+            textViewAlarmTimeScreen.setText(idNumStopScreenHour + ":0" + idNumStopScreenMin + ":" + idNumStopScreenSec);
+        } else if (idNumStopScreenHour > 9 && idNumStopScreenMin > 9 && idNumStopScreenSec > 9) {
+            textViewAlarmTimeScreen.setText(idNumStopScreenHour + ":" + idNumStopScreenMin + ":" + idNumStopScreenSec);
+        }
+
+        if (idNumStopScreen != 1) {
+            imageStopScreen.setVisibility(View.GONE);
+            textViewAlarmTimeScreen.setVisibility(View.GONE);
+        } else {
+            imageStopScreen.setVisibility(View.VISIBLE);
+            textViewAlarmTimeScreen.setVisibility(View.VISIBLE);
+        }
+    }
+
     private void startStopRest() {
+        imageStopRest.setVisibility(View.GONE);
+        textViewAlarmTimeRest.setVisibility(View.GONE);
+
         if (timerStatusRest == TimerStatusRest.STOPPED_REST) {
             setTimerValuesRest();
             setProgressBarValuesRest();
@@ -171,6 +311,42 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
             timerStatusRest = TimerStatusRest.STOPPED_REST;
             stopCountDownTimerRest();
             stopAlarmRest();
+        }
+    }
+
+    private void checkStopRest() {
+        SharedPreferences prefs = getSharedPreferences("total_stop_rest", MODE_PRIVATE);
+        int idNumStopRest = prefs.getInt("rest", 900000);
+
+        SharedPreferences prefs2 = getSharedPreferences("total_time_rest", MODE_PRIVATE);
+        int idNumStopRestHour = prefs2.getInt("time_rest_hour", 0);
+        int idNumStopRestMin = prefs2.getInt("time_rest_min", 0);
+        int idNumStopRestSec = prefs2.getInt("time_rest_sec", 0);
+
+        if (idNumStopRestHour <= 9 && idNumStopRestMin <= 9 && idNumStopRestSec <= 9) {
+            textViewAlarmTimeRest.setText("0" + idNumStopRestHour + ":0" + idNumStopRestMin + ":0" + idNumStopRestSec);
+        } else if (idNumStopRestHour <= 9 && idNumStopRestMin <= 9 && idNumStopRestSec > 9) {
+            textViewAlarmTimeRest.setText("0" + idNumStopRestHour + ":0" + idNumStopRestMin + ":" + idNumStopRestSec);
+        } else if (idNumStopRestHour > 9 && idNumStopRestMin <= 9 && idNumStopRestSec <= 9) {
+            textViewAlarmTimeRest.setText(idNumStopRestHour + ":0" + idNumStopRestMin + ":0" + idNumStopRestSec);
+        } else if (idNumStopRestHour <= 9 && idNumStopRestMin > 9 && idNumStopRestSec <= 9) {
+            textViewAlarmTimeRest.setText("0" + idNumStopRestHour + ":" + idNumStopRestMin + ":0" + idNumStopRestSec);
+        } else if (idNumStopRestHour > 9 && idNumStopRestMin > 9 && idNumStopRestSec <= 9) {
+            textViewAlarmTimeRest.setText(idNumStopRestHour + ":" + idNumStopRestMin + ":0" + idNumStopRestSec);
+        } else if (idNumStopRestHour <= 9 && idNumStopRestMin > 9 && idNumStopRestSec > 9) {
+            textViewAlarmTimeRest.setText("0" + idNumStopRestHour + ":" + idNumStopRestMin + ":" + idNumStopRestSec);
+        } else if (idNumStopRestHour > 9 && idNumStopRestMin <= 9 && idNumStopRestSec > 9) {
+            textViewAlarmTimeRest.setText(idNumStopRestHour + ":0" + idNumStopRestMin + ":" + idNumStopRestSec);
+        } else if (idNumStopRestHour > 9 && idNumStopRestMin > 9 && idNumStopRestSec > 9) {
+            textViewAlarmTimeRest.setText(idNumStopRestHour + ":" + idNumStopRestMin + ":" + idNumStopRestSec);
+        }
+
+        if (idNumStopRest != 1) {
+            imageStopRest.setVisibility(View.GONE);
+            textViewAlarmTimeRest.setVisibility(View.GONE);
+        } else {
+            imageStopRest.setVisibility(View.VISIBLE);
+            textViewAlarmTimeRest.setVisibility(View.VISIBLE);
         }
     }
 
@@ -231,6 +407,12 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
         alarmManagerScreen = (AlarmManager) getSystemService(ALARM_SERVICE);
         alarmIntent.setData((Uri.parse("custom://" + System.currentTimeMillis())));
 
+        SharedPreferences.Editor editor2 = getSharedPreferences("total_time_screen", MODE_PRIVATE).edit();
+        editor2.putInt("time_screen_hour", hours4);
+        editor2.putInt("time_screen_min", mins3);
+        editor2.putInt("time_screen_sec", secs2);
+        editor2.apply();
+
         Calendar alarmStartTime = Calendar.getInstance();
         Calendar now = Calendar.getInstance();
         alarmStartTime.set(Calendar.HOUR_OF_DAY, hours4);
@@ -245,6 +427,10 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
         PackageManager pm2 = getPackageManager();
 
         pm2.setComponentEnabledSetting(receiver2, PackageManager.COMPONENT_ENABLED_STATE_ENABLED, PackageManager.DONT_KILL_APP);
+
+        SharedPreferences.Editor editor = getSharedPreferences("total_stop_screen", MODE_PRIVATE).edit();
+        editor.putInt("screen", 1);
+        editor.apply();
     }
 
     private void startAlarmRest() {
@@ -304,6 +490,12 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
         alarmManagerRest = (AlarmManager) getSystemService(ALARM_SERVICE);
         alarmIntent.setData((Uri.parse("custom://" + System.currentTimeMillis())));
 
+        SharedPreferences.Editor editor2 = getSharedPreferences("total_time_rest", MODE_PRIVATE).edit();
+        editor2.putInt("time_rest_hour", hours4);
+        editor2.putInt("time_rest_min", mins3);
+        editor2.putInt("time_rest_sec", secs2);
+        editor2.apply();
+
         Calendar alarmStartTime = Calendar.getInstance();
         Calendar now = Calendar.getInstance();
         alarmStartTime.set(Calendar.HOUR_OF_DAY, hours4);
@@ -318,9 +510,24 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
         PackageManager pm2 = getPackageManager();
 
         pm2.setComponentEnabledSetting(receiver2, PackageManager.COMPONENT_ENABLED_STATE_ENABLED, PackageManager.DONT_KILL_APP);
+
+        SharedPreferences.Editor editor = getSharedPreferences("total_stop_rest", MODE_PRIVATE).edit();
+        editor.putInt("rest", 1);
+        editor.apply();
+
+        SharedPreferences.Editor editor3 = getSharedPreferences("total_stop_screen_me", MODE_PRIVATE).edit();
+        editor3.putInt("screen_me", 900000);
+        editor3.apply();
     }
 
     private void stopAlarmScreen() {
+        SharedPreferences.Editor editor = getSharedPreferences("total_stop_screen", MODE_PRIVATE).edit();
+        editor.putInt("screen", 900000);
+        editor.apply();
+
+        SharedPreferences prefs = getSharedPreferences("total_stop_screen", MODE_PRIVATE);
+        int idNumStopScreen = prefs.getInt("screen", 900000);
+
         ComponentName receiver = new ComponentName(TimerActivity.this, MyReceiverAlarmScreen.class);
         PackageManager pm = getPackageManager();
         pm.setComponentEnabledSetting(receiver, PackageManager.COMPONENT_ENABLED_STATE_DISABLED, PackageManager.DONT_KILL_APP);
@@ -332,9 +539,9 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
 
         Calendar alarmStartTime = Calendar.getInstance();
         Calendar now = Calendar.getInstance();
-        alarmStartTime.set(Calendar.HOUR_OF_DAY, 900000);
-        alarmStartTime.set(Calendar.MINUTE, 900000);
-        alarmStartTime.set(Calendar.SECOND, 900000);
+        alarmStartTime.set(Calendar.HOUR_OF_DAY, idNumStopScreen);
+        alarmStartTime.set(Calendar.MINUTE, idNumStopScreen);
+        alarmStartTime.set(Calendar.SECOND, idNumStopScreen);
         if (now.after(alarmStartTime)) {
             alarmStartTime.add(Calendar.DATE, 1);
         }
@@ -354,6 +561,13 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
     }
 
     private void stopAlarmRest() {
+        SharedPreferences.Editor editor = getSharedPreferences("total_stop_rest", MODE_PRIVATE).edit();
+        editor.putInt("rest", 900000);
+        editor.apply();
+
+        SharedPreferences prefs = getSharedPreferences("total_stop_rest", MODE_PRIVATE);
+        int idNumStopRest = prefs.getInt("rest", 900000);
+
         ComponentName receiver = new ComponentName(TimerActivity.this, MyReceiverAlarmRest.class);
         PackageManager pm = getPackageManager();
         pm.setComponentEnabledSetting(receiver, PackageManager.COMPONENT_ENABLED_STATE_DISABLED, PackageManager.DONT_KILL_APP);
@@ -365,9 +579,9 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
 
         Calendar alarmStartTime = Calendar.getInstance();
         Calendar now = Calendar.getInstance();
-        alarmStartTime.set(Calendar.HOUR_OF_DAY, 900000);
-        alarmStartTime.set(Calendar.MINUTE, 900000);
-        alarmStartTime.set(Calendar.SECOND, 900000);
+        alarmStartTime.set(Calendar.HOUR_OF_DAY, idNumStopRest);
+        alarmStartTime.set(Calendar.MINUTE, idNumStopRest);
+        alarmStartTime.set(Calendar.SECOND, idNumStopRest);
         if (now.after(alarmStartTime)) {
             alarmStartTime.add(Calendar.DATE, 1);
         }
@@ -477,6 +691,8 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
                 imageViewStartStopScreen.setVisibility(View.GONE);
                 backBtnScreen.setVisibility(View.GONE);
                 titleTimerScreen.setVisibility(View.GONE);
+                imageStopScreen.setVisibility(View.GONE);
+                textViewAlarmTimeScreen.setVisibility(View.GONE);
                 timerStatusScreen = TimerStatusScreen.STOPPED_SCREEN;
 
                 textViewTimeRest.setVisibility(View.VISIBLE);
@@ -486,6 +702,14 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
                 titleTimerRest.setVisibility(View.VISIBLE);
 
                 imageViewStartStopRest.setImageResource(R.drawable.icon_start_rest);
+
+                SharedPreferences.Editor editor = getSharedPreferences("total_stop_screen", MODE_PRIVATE).edit();
+                editor.putInt("screen", 900000);
+                editor.apply();
+
+                SharedPreferences.Editor editor2 = getSharedPreferences("total_stop_screen_me", MODE_PRIVATE).edit();
+                editor2.putInt("screen_me", 900000);
+                editor2.apply();
             }
         }.start();
         countDownTimerScreen.start();
@@ -516,9 +740,28 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
                 imageViewStartStopRest.setVisibility(View.GONE);
                 backBtnRest.setVisibility(View.GONE);
                 titleTimerRest.setVisibility(View.GONE);
+                imageStopRest.setVisibility(View.GONE);
+                textViewAlarmTimeRest.setVisibility(View.GONE);
                 timerStatusRest = TimerStatusRest.STOPPED_REST;
 
                 imageViewStartStopScreen.setImageResource(R.drawable.icon_start_screen);
+
+                SharedPreferences.Editor editor = getSharedPreferences("total_stop_rest", MODE_PRIVATE).edit();
+                editor.putInt("rest", 900000);
+                editor.apply();
+
+                SharedPreferences.Editor editor2 = getSharedPreferences("total_stop_rest_me", MODE_PRIVATE).edit();
+                editor2.putInt("rest_me", 900000);
+                editor2.apply();
+
+                Toast toast = Toast.makeText(TimerActivity.this, getString(R.string.restart_details), Toast.LENGTH_LONG);
+                View view = toast.getView();
+                view.getBackground().setColorFilter(getResources().getColor(R.color.colorPrimary), PorterDuff.Mode.SRC_IN);
+                TextView text = view.findViewById(android.R.id.message);
+                text.setTextColor(getResources().getColor(R.color.colorYellow));
+                toast.show();
+
+                onBackPressed();
             }
         }.start();
         countDownTimerRest.start();

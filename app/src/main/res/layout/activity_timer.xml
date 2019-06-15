@@ -42,6 +42,26 @@
         android:progressDrawable="@drawable/drawable_circle_yellow"
         android:rotation="-90" />
 
+    <ImageView
+        android:id="@+id/imageStopScreen"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_above="@+id/textViewAlarmTimeScreen"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="10dp"
+        android:gravity="center"
+        android:src="@drawable/icon_stop_screen" />
+
+    <TextView
+        android:id="@+id/textViewAlarmTimeScreen"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/textViewTimeScreen"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="10dp"
+        android:gravity="center"
+        android:textColor="@color/colorYellow" />
+
     <TextView
         android:id="@+id/textViewTimeScreen"
         android:layout_width="wrap_content"
@@ -106,6 +126,26 @@
         android:progress="100"
         android:progressDrawable="@drawable/drawable_circle_green"
         android:rotation="-90" />
+
+    <ImageView
+        android:id="@+id/imageStopRest"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_above="@+id/textViewAlarmTimeRest"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="10dp"
+        android:gravity="center"
+        android:src="@drawable/icon_stop_rest" />
+
+    <TextView
+        android:id="@+id/textViewAlarmTimeRest"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/textViewTimeRest"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="10dp"
+        android:gravity="center"
+        android:textColor="@color/colorGreen" />
 
     <TextView
         android:id="@+id/textViewTimeRest"

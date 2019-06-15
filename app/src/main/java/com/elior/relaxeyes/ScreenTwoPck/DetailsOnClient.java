@@ -44,6 +44,8 @@ public class DetailsOnClient extends AppCompatActivity implements NavigationView
         setContentView(R.layout.activity_client);
 
         initUI();
+        checkStopScreen();
+        checkStopRest();
         initSpinner();
         submitData();
         myDrawerLayout();
@@ -105,6 +107,26 @@ public class DetailsOnClient extends AppCompatActivity implements NavigationView
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.END);
         return true;
+    }
+
+    private void checkStopScreen() {
+        SharedPreferences prefs = getSharedPreferences("total_stop_screen", MODE_PRIVATE);
+        int idNumStopScreen = prefs.getInt("screen", 900000);
+
+        if (idNumStopScreen == 1) {
+            Intent intent = new Intent(DetailsOnClient.this, TimerActivity.class);
+            startActivity(intent);
+        }
+    }
+
+    private void checkStopRest() {
+        SharedPreferences prefs = getSharedPreferences("total_stop_rest", MODE_PRIVATE);
+        int idNumStopRest = prefs.getInt("rest", 900000);
+
+        if (idNumStopRest == 1) {
+            Intent intent = new Intent(DetailsOnClient.this, TimerActivity.class);
+            startActivity(intent);
+        }
     }
 
     private void initSpinner() {
