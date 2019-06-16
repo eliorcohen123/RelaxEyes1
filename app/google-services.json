@@ -1,34 +1,34 @@
 {
   "project_info": {
-    "project_number": "951431922923",
-    "firebase_url": "https://relax-eyes.firebaseio.com",
-    "project_id": "relax-eyes",
-    "storage_bucket": "relax-eyes.appspot.com"
+    "project_number": "906795118611",
+    "firebase_url": "https://relax-eyes-7b41a.firebaseio.com",
+    "project_id": "relax-eyes-7b41a",
+    "storage_bucket": "relax-eyes-7b41a.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:951431922923:android:3dab779892b96e4c",
+        "mobilesdk_app_id": "1:906795118611:android:c069006b4093583e",
         "android_client_info": {
-          "package_name": "com.elior.relaxeyes"
+          "package_name": "com.app.relaxeyes"
         }
       },
       "oauth_client": [
         {
-          "client_id": "951431922923-of8vqffqc7akpt310v6hf16pd6le8r42.apps.googleusercontent.com",
+          "client_id": "906795118611-htvhplos51igfpkbun82kqgjaahe8qgg.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyABOZNHIx_KKZrA4CBSUUwK7zTKHU9cNng"
+          "current_key": "AIzaSyDiqp9lnz_YB4G8eVrkL9D8OLhn-mEmL1A"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "951431922923-of8vqffqc7akpt310v6hf16pd6le8r42.apps.googleusercontent.com",
+              "client_id": "906795118611-htvhplos51igfpkbun82kqgjaahe8qgg.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

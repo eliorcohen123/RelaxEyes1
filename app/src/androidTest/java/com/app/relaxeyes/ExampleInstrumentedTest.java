@@ -1,4 +1,4 @@
-package com.elior.relaxeyes;
+package com.app.relaxeyes;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

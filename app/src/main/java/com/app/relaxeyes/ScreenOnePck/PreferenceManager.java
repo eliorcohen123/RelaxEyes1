@@ -1,4 +1,4 @@
-package com.elior.relaxeyes.ScreenOnePck;
+package com.app.relaxeyes.ScreenOnePck;
 
 import android.content.Context;
 import android.content.SharedPreferences;

@@ -1,4 +1,4 @@
-package com.elior.relaxeyes;
+package com.app.relaxeyes;
 
 import org.junit.Test;
 

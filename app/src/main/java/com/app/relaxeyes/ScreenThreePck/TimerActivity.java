@@ -1,4 +1,4 @@
-package com.elior.relaxeyes.ScreenThreePck;
+package com.app.relaxeyes.ScreenThreePck;
 
 import android.app.AlarmManager;
 import android.app.NotificationManager;
@@ -20,10 +20,9 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.elior.relaxeyes.BroadcastReceiverPck.MyReceiverAlarmRest;
-import com.elior.relaxeyes.R;
-import com.elior.relaxeyes.BroadcastReceiverPck.MyReceiverAlarmScreen;
-import com.elior.relaxeyes.ScreenTwoPck.DetailsOnClient;
+import com.app.relaxeyes.BroadcastReceiverPck.MyReceiverAlarmRest;
+import com.app.relaxeyes.R;
+import com.app.relaxeyes.BroadcastReceiverPck.MyReceiverAlarmScreen;
 
 import java.util.Calendar;
 import java.util.concurrent.TimeUnit;

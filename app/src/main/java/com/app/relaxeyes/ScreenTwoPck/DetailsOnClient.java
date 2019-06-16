@@ -1,4 +1,4 @@
-package com.elior.relaxeyes.ScreenTwoPck;
+package com.app.relaxeyes.ScreenTwoPck;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -18,9 +18,9 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.elior.relaxeyes.R;
-import com.elior.relaxeyes.ScreenOnePck.WelcomeActivityRegulations;
-import com.elior.relaxeyes.ScreenThreePck.TimerActivity;
+import com.app.relaxeyes.R;
+import com.app.relaxeyes.ScreenOnePck.WelcomeActivityRegulations;
+import com.app.relaxeyes.ScreenThreePck.TimerActivity;
 
 public class DetailsOnClient extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -99,7 +99,7 @@ public class DetailsOnClient extends AppCompatActivity implements NavigationView
             Intent sendIntent = new Intent();
             sendIntent.setAction(Intent.ACTION_SEND);
             sendIntent.putExtra(Intent.EXTRA_TEXT,
-                    "היי, אתה מוזמן לבקר באפליקצייה שלי: https://play.google.com/store/apps/details?id=com.elior.relaxeyes");
+                    "היי, אתה מוזמן לבקר באפליקצייה שלי: https://play.google.com/store/apps/details?id=com.app.relaxeyes");
             sendIntent.setType("text/plain");
             startActivity(sendIntent);
         }

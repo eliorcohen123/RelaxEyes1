@@ -1,4 +1,4 @@
-package com.elior.relaxeyes.OtherPck;
+package com.app.relaxeyes.OtherPck;
 
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -11,8 +11,8 @@ import android.os.Build;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
-import com.elior.relaxeyes.R;
-import com.elior.relaxeyes.ScreenOnePck.WelcomeActivity;
+import com.app.relaxeyes.R;
+import com.app.relaxeyes.ScreenOnePck.WelcomeActivity;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
