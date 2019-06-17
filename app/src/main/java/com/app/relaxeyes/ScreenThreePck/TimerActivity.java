@@ -637,7 +637,7 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
         int temp = (int) timeCountInMilliSecondsRest - hours * 3600000;
         int mins = temp / 60000;
         temp = temp - mins * 60000;
-        int secs = temp / 1000;
+        int secs = temp / 1000
         if (hours <= 9 && mins <= 9 && secs <= 9) {
             textViewTimeRest.setText("0" + hours + ":0" + mins + ":0" + secs);
         } else if (hours <= 9 && mins <= 9 && secs > 9) {
