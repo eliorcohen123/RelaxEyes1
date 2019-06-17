@@ -231,12 +231,12 @@ public class DetailsOnClient extends AppCompatActivity implements NavigationView
                     text.setTextColor(getResources().getColor(R.color.colorYellow));
                     toast.show();
                 } else {
-                    SharedPreferences.Editor editor = getSharedPreferences("total_val", MODE_PRIVATE).edit();
-                    editor.putFloat("total", (float) yourValTotal);
+                    SharedPreferences.Editor editor = getSharedPreferences("total_val_screen", MODE_PRIVATE).edit();
+                    editor.putFloat("total_screen", (float) yourValTotal);
                     editor.apply();
 
-                    SharedPreferences.Editor editorRest = getSharedPreferences("total_mins", MODE_PRIVATE).edit();
-                    editorRest.putInt("mins", yourValMins);
+                    SharedPreferences.Editor editorRest = getSharedPreferences("total_val_rest", MODE_PRIVATE).edit();
+                    editorRest.putInt("total_rest", yourValMins);
                     editorRest.apply();
 
                     Intent intent = new Intent(DetailsOnClient.this, TimerActivity.class);

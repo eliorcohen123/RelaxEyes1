@@ -113,8 +113,8 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
         imageStopRest.setVisibility(View.GONE);
         textViewAlarmTimeRest.setVisibility(View.GONE);
 
-        SharedPreferences prefs = getSharedPreferences("total_mins", MODE_PRIVATE);
-        int idNumRest = prefs.getInt("mins", 0);
+        SharedPreferences prefs = getSharedPreferences("total_val_rest", MODE_PRIVATE);
+        int idNumRest = prefs.getInt("total_rest", 0);
 
         SharedPreferences prefs2 = getSharedPreferences("total_stop_screen_me", MODE_PRIVATE);
         int idNumScreen = prefs2.getInt("screen_me", 1);
@@ -350,8 +350,8 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
     }
 
     private void startAlarmScreen() {
-        SharedPreferences prefs = getSharedPreferences("total_val", MODE_PRIVATE);
-        float idNum = prefs.getFloat("total", (float) 1000.0);
+        SharedPreferences prefs = getSharedPreferences("total_val_screen", MODE_PRIVATE);
+        float idNum = prefs.getFloat("total_screen", (float) 1000.0);
 
         Calendar cal = Calendar.getInstance();
         int currentHour = cal.get(Calendar.HOUR_OF_DAY);
@@ -433,8 +433,8 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
     }
 
     private void startAlarmRest() {
-        SharedPreferences prefs = getSharedPreferences("total_mins", MODE_PRIVATE);
-        int idNumRest = prefs.getInt("mins", 3);
+        SharedPreferences prefs = getSharedPreferences("total_val_rest", MODE_PRIVATE);
+        int idNumRest = prefs.getInt("total_rest", 3);
 
         Calendar cal = Calendar.getInstance();
         int currentHour = cal.get(Calendar.HOUR_OF_DAY);
@@ -600,8 +600,8 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
     }
 
     private void myTextValueScreen() {
-        SharedPreferences prefs = getSharedPreferences("total_val", MODE_PRIVATE);
-        float idNum = prefs.getFloat("total", (float) 1000.0);
+        SharedPreferences prefs = getSharedPreferences("total_val_screen", MODE_PRIVATE);
+        float idNum = prefs.getFloat("total_screen", (float) 1000.0);
 
         timeCountInMilliSecondsScreen = (long) (30 * 60 * idNum);
         int hours = (int) timeCountInMilliSecondsScreen / 3600000;
@@ -629,8 +629,8 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
     }
 
     private void myTextValueRest() {
-        SharedPreferences prefs = getSharedPreferences("total_mins", MODE_PRIVATE);
-        int idNumRest = prefs.getInt("mins", 3);
+        SharedPreferences prefs = getSharedPreferences("total_val_rest", MODE_PRIVATE);
+        int idNumRest = prefs.getInt("total_rest", 3);
 
         timeCountInMilliSecondsRest = (long) (60 * 1000 * idNumRest);
         int hours = (int) timeCountInMilliSecondsRest / 3600000;
@@ -658,15 +658,15 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
     }
 
     private void setTimerValuesScreen() {
-        SharedPreferences prefs = getSharedPreferences("total_val", MODE_PRIVATE);
-        float idNum = prefs.getFloat("total", (float) 1000.0);
+        SharedPreferences prefs = getSharedPreferences("total_val_screen", MODE_PRIVATE);
+        float idNum = prefs.getFloat("total_screen", (float) 1000.0);
 
         timeCountInMilliSecondsScreen = (long) (30 * 60 * idNum);
     }
 
     private void setTimerValuesRest() {
-        SharedPreferences prefs = getSharedPreferences("total_mins", MODE_PRIVATE);
-        int idNumRest = prefs.getInt("mins", 3);
+        SharedPreferences prefs = getSharedPreferences("total_val_rest", MODE_PRIVATE);
+        int idNumRest = prefs.getInt("total_rest", 3);
 
         timeCountInMilliSecondsRest = (long) (60 * 1000 * idNumRest);
     }
