@@ -16,14 +16,14 @@ import com.app.relaxeyes.ScreenThreePck.TimerActivity;
 public class MyReceiverAlarmRest extends BroadcastReceiver {
 
     private NotificationManager notificationManager;
+    private NotificationCompat.Builder builder;
+    private static PendingIntent pendingIntent;
 
     @Override
     public void onReceive(Context context, Intent intent) {
         final int NOTIFY_ID = 3; // ID of notification
         String id = "3"; // default_channel_id
         String title = "ריענון עיניים"; // Default Channel
-        PendingIntent pendingIntent;
-        NotificationCompat.Builder builder;
         if (notificationManager == null) {
             notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         }
@@ -36,35 +36,28 @@ public class MyReceiverAlarmRest extends BroadcastReceiver {
                 mChannel.setVibrationPattern(new long[]{100, 200, 300, 400, 500, 400, 300, 200, 400});
                 notificationManager.createNotificationChannel(mChannel);
             }
-            builder = new NotificationCompat.Builder(context, id);
-            intent = new Intent(context, TimerActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-            pendingIntent = PendingIntent.getActivity(context, 3, intent, 0);
-            builder.setContentTitle("ריענון עיניים")
-                    .setContentText("היי… הסתיים זמן הרענון :)")  // required
-                    .setSmallIcon(R.drawable.eye_icon)  // required
-                    .setDefaults(Notification.DEFAULT_ALL)
-                    .setAutoCancel(true)
-                    .setContentIntent(pendingIntent)
-                    .setTicker("ריענון העיניים")
-                    .setVibrate(new long[]{100, 200, 300, 400, 500, 400, 300, 200, 400});
+            getBuilder(context, id);
         } else {
-            builder = new NotificationCompat.Builder(context, id);
-            intent = new Intent(context, TimerActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-            pendingIntent = PendingIntent.getActivity(context, 3, intent, 0);
-            builder.setContentTitle("ריענון עיניים")
-                    .setContentText("היי… הסתיים זמן הרענון :)")  // required
-                    .setSmallIcon(R.drawable.eye_icon)  // required
-                    .setDefaults(Notification.DEFAULT_ALL)
-                    .setAutoCancel(true)
-                    .setContentIntent(pendingIntent)
-                    .setTicker("ריענון העיניים")
-                    .setVibrate(new long[]{100, 200, 300, 400, 500, 400, 300, 200, 400})
-                    .setPriority(Notification.PRIORITY_HIGH);
+            getBuilder(context, id);
         }
         Notification notification = builder.build();
         notificationManager.notify(NOTIFY_ID, notification);
+    }
+
+    private void getBuilder(Context context, String id) {
+        builder = new NotificationCompat.Builder(context, id);
+        Intent intent = new Intent(context, TimerActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        pendingIntent = PendingIntent.getActivity(context, 3, intent, 0);
+        builder.setContentTitle("ריענון עיניים")
+                .setContentText("היי… הסתיים זמן הרענון :)")  // required
+                .setSmallIcon(R.drawable.eye_icon)  // required
+                .setDefaults(Notification.DEFAULT_ALL)
+                .setAutoCancel(true)
+                .setContentIntent(pendingIntent)
+                .setTicker("ריענון העיניים")
+                .setVibrate(new long[]{100, 200, 300, 400, 500, 400, 300, 200, 400})
+                .setPriority(Notification.PRIORITY_HIGH);
     }
 
 }
