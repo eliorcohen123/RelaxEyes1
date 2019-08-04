@@ -37,6 +37,8 @@ public class DetailsOnClient extends AppCompatActivity implements NavigationView
     private Toolbar toolbar;
     private NavigationView navigationView;
     private DrawerLayout drawer;
+    private ArrayAdapter<String> spinnerArrayAdapterAge, spinnerArrayAdapterSex, spinnerArrayAdapterScreen, spinnerArrayAdapterRest;
+    private SharedPreferences.Editor editor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -131,22 +133,22 @@ public class DetailsOnClient extends AppCompatActivity implements NavigationView
 
     private void initSpinner() {
         // spinnerAge
-        ArrayAdapter<String> spinnerArrayAdapterAge = new ArrayAdapter<String>(this, R.layout.spinner_item, age_arrays);
+        spinnerArrayAdapterAge = new ArrayAdapter<String>(this, R.layout.spinner_item, age_arrays);
         spinnerArrayAdapterAge.setDropDownViewResource(R.layout.simple_spinner_dropdown_item); // The drop down view
         spinnerAge.setAdapter(spinnerArrayAdapterAge);
 
         // spinnerSex
-        ArrayAdapter<String> spinnerArrayAdapterSex = new ArrayAdapter<String>(this, R.layout.spinner_item, sex_arrays);
+        spinnerArrayAdapterSex = new ArrayAdapter<String>(this, R.layout.spinner_item, sex_arrays);
         spinnerArrayAdapterSex.setDropDownViewResource(R.layout.simple_spinner_dropdown_item); // The drop down view
         spinnerSex.setAdapter(spinnerArrayAdapterSex);
 
         // spinnerScreen
-        ArrayAdapter<String> spinnerArrayAdapterScreen = new ArrayAdapter<String>(this, R.layout.spinner_item, screen_arrays);
+        spinnerArrayAdapterScreen = new ArrayAdapter<String>(this, R.layout.spinner_item, screen_arrays);
         spinnerArrayAdapterScreen.setDropDownViewResource(R.layout.simple_spinner_dropdown_item); // The drop down view
         spinnerScreen.setAdapter(spinnerArrayAdapterScreen);
 
         // spinnerRest
-        ArrayAdapter<String> spinnerArrayAdapterRest = new ArrayAdapter<String>(this, R.layout.spinner_item, rest_arrays);
+        spinnerArrayAdapterRest = new ArrayAdapter<String>(this, R.layout.spinner_item, rest_arrays);
         spinnerArrayAdapterRest.setDropDownViewResource(R.layout.simple_spinner_dropdown_item); // The drop down view
         spinnerRest.setAdapter(spinnerArrayAdapterRest);
     }
@@ -231,19 +233,26 @@ public class DetailsOnClient extends AppCompatActivity implements NavigationView
                     text.setTextColor(getResources().getColor(R.color.colorYellow));
                     toast.show();
                 } else {
-                    SharedPreferences.Editor editor = getSharedPreferences("total_val_screen", MODE_PRIVATE).edit();
-                    editor.putFloat("total_screen", (float) yourValTotal);
-                    editor.apply();
-
-                    SharedPreferences.Editor editorRest = getSharedPreferences("total_val_rest", MODE_PRIVATE).edit();
-                    editorRest.putInt("total_rest", yourValMins);
-                    editorRest.apply();
+                    getSharedPrefScreen("total_val_screen", "total_screen", yourValTotal);
+                    getSharedPrefRest("total_val_rest", "total_rest", yourValMins);
 
                     Intent intent = new Intent(DetailsOnClient.this, TimerActivity.class);
                     startActivity(intent);
                 }
             }
         });
+    }
+
+    private void getSharedPrefScreen(String name, String key, double val) {
+        editor = getSharedPreferences(name, MODE_PRIVATE).edit();
+        editor.putFloat(key, (float) val);
+        editor.apply();
+    }
+
+    private void getSharedPrefRest(String name, String key, int val) {
+        editor = getSharedPreferences(name, MODE_PRIVATE).edit();
+        editor.putInt(key, val);
+        editor.apply();
     }
 
 }

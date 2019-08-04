@@ -52,6 +52,8 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
     private Button backBtnScreen, backBtnRest;
     private AlarmManager alarmManagerScreen, alarmManagerRest;
     private NotificationManager notificationManagerScreen, notificationManagerRest;
+    private SharedPreferences.Editor editor;
+    private SharedPreferences prefs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -113,14 +115,14 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
         imageStopRest.setVisibility(View.GONE);
         textViewAlarmTimeRest.setVisibility(View.GONE);
 
-        SharedPreferences prefs = getSharedPreferences("total_val_rest", MODE_PRIVATE);
+        prefs = getSharedPreferences("total_val_rest", MODE_PRIVATE);
         int idNumRest = prefs.getInt("total_rest", 0);
 
-        SharedPreferences prefs2 = getSharedPreferences("total_stop_screen_me", MODE_PRIVATE);
-        int idNumScreen = prefs2.getInt("screen_me", 1);
+        prefs = getSharedPreferences("total_stop_screen_me", MODE_PRIVATE);
+        int idNumScreen = prefs.getInt("screen_me", 1);
 
-        SharedPreferences prefs3 = getSharedPreferences("total_stop_rest_me", MODE_PRIVATE);
-        int idNumRest2 = prefs3.getInt("rest_me", 1);
+        prefs = getSharedPreferences("total_stop_rest_me", MODE_PRIVATE);
+        int idNumRest2 = prefs.getInt("rest_me", 1);
 
         if (idNumRest != 0 && idNumScreen == 900000) {
             textViewTimeRest.setVisibility(View.VISIBLE);
@@ -184,9 +186,7 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
             case R.id.backBtnRest:
                 delData();
 
-                SharedPreferences.Editor editor2 = getSharedPreferences("total_stop_rest_me", MODE_PRIVATE).edit();
-                editor2.putInt("rest_me", 900000);
-                editor2.apply();
+                getSharedPref("total_stop_rest_me", "rest_me", 900000);
 
                 onBackPressed();
                 break;
@@ -204,9 +204,7 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
 
                 delData();
 
-                SharedPreferences.Editor editor3 = getSharedPreferences("total_stop_rest_me", MODE_PRIVATE).edit();
-                editor3.putInt("rest_me", 900000);
-                editor3.apply();
+                getSharedPref("total_stop_rest_me", "rest_me", 900000);
 
                 onBackPressed();
                 break;
@@ -214,13 +212,8 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
     }
 
     private void delData() {
-        SharedPreferences.Editor editor = getSharedPreferences("total_stop_screen", MODE_PRIVATE).edit();
-        editor.putInt("screen", 900000);
-        editor.apply();
-
-        SharedPreferences.Editor editor2 = getSharedPreferences("total_stop_rest", MODE_PRIVATE).edit();
-        editor2.putInt("rest", 900000);
-        editor2.apply();
+        getSharedPref("total_stop_screen", "screen", 900000);
+        getSharedPref("total_stop_rest", "rest", 900000);
     }
 
     private void resetScreen() {
@@ -257,13 +250,13 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
     }
 
     private void checkStopScreen() {
-        SharedPreferences prefs = getSharedPreferences("total_stop_screen", MODE_PRIVATE);
+        prefs = getSharedPreferences("total_stop_screen", MODE_PRIVATE);
         int idNumStopScreen = prefs.getInt("screen", 900000);
 
-        SharedPreferences prefs2 = getSharedPreferences("total_time_screen", MODE_PRIVATE);
-        int idNumStopScreenHour = prefs2.getInt("time_screen_hour", 0);
-        int idNumStopScreenMin = prefs2.getInt("time_screen_min", 0);
-        int idNumStopScreenSec = prefs2.getInt("time_screen_sec", 0);
+        prefs = getSharedPreferences("total_time_screen", MODE_PRIVATE);
+        int idNumStopScreenHour = prefs.getInt("time_screen_hour", 0);
+        int idNumStopScreenMin = prefs.getInt("time_screen_min", 0);
+        int idNumStopScreenSec = prefs.getInt("time_screen_sec", 0);
 
         if (idNumStopScreenHour <= 9 && idNumStopScreenMin <= 9 && idNumStopScreenSec <= 9) {
             textViewAlarmTimeScreen.setText("0" + idNumStopScreenHour + ":0" + idNumStopScreenMin + ":0" + idNumStopScreenSec);
@@ -314,13 +307,13 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
     }
 
     private void checkStopRest() {
-        SharedPreferences prefs = getSharedPreferences("total_stop_rest", MODE_PRIVATE);
+        prefs = getSharedPreferences("total_stop_rest", MODE_PRIVATE);
         int idNumStopRest = prefs.getInt("rest", 900000);
 
-        SharedPreferences prefs2 = getSharedPreferences("total_time_rest", MODE_PRIVATE);
-        int idNumStopRestHour = prefs2.getInt("time_rest_hour", 0);
-        int idNumStopRestMin = prefs2.getInt("time_rest_min", 0);
-        int idNumStopRestSec = prefs2.getInt("time_rest_sec", 0);
+        prefs = getSharedPreferences("total_time_rest", MODE_PRIVATE);
+        int idNumStopRestHour = prefs.getInt("time_rest_hour", 0);
+        int idNumStopRestMin = prefs.getInt("time_rest_min", 0);
+        int idNumStopRestSec = prefs.getInt("time_rest_sec", 0);
 
         if (idNumStopRestHour <= 9 && idNumStopRestMin <= 9 && idNumStopRestSec <= 9) {
             textViewAlarmTimeRest.setText("0" + idNumStopRestHour + ":0" + idNumStopRestMin + ":0" + idNumStopRestSec);
@@ -350,7 +343,7 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
     }
 
     private void startAlarmScreen() {
-        SharedPreferences prefs = getSharedPreferences("total_val_screen", MODE_PRIVATE);
+        prefs = getSharedPreferences("total_val_screen", MODE_PRIVATE);
         float idNum = prefs.getFloat("total_screen", (float) 1000.0);
 
         Calendar cal = Calendar.getInstance();
@@ -396,21 +389,12 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
             hours4 = hours3;
         }
 
-        ComponentName receiver = new ComponentName(TimerActivity.this, MyReceiverAlarmScreen.class);
-        PackageManager pm = getPackageManager();
-
-        pm.setComponentEnabledSetting(receiver, PackageManager.COMPONENT_ENABLED_STATE_ENABLED, PackageManager.DONT_KILL_APP);
-
         Intent alarmIntent = new Intent(TimerActivity.this, MyReceiverAlarmScreen.class); // AlarmReceiver1 = broadcast receiver
         pendingIntentScreen = PendingIntent.getBroadcast(TimerActivity.this, 1, alarmIntent, PendingIntent.FLAG_UPDATE_CURRENT);
         alarmManagerScreen = (AlarmManager) getSystemService(ALARM_SERVICE);
         alarmIntent.setData((Uri.parse("custom://" + System.currentTimeMillis())));
 
-        SharedPreferences.Editor editor2 = getSharedPreferences("total_time_screen", MODE_PRIVATE).edit();
-        editor2.putInt("time_screen_hour", hours4);
-        editor2.putInt("time_screen_min", mins3);
-        editor2.putInt("time_screen_sec", secs2);
-        editor2.apply();
+        getSharedPrefMulti("total_time_screen", "time_screen_hour", "time_screen_min", "time_screen_sec", hours4, mins3, secs2);
 
         Calendar alarmStartTime = Calendar.getInstance();
         Calendar now = Calendar.getInstance();
@@ -422,18 +406,16 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
         }
         alarmManagerScreen.setRepeating(AlarmManager.RTC_WAKEUP, alarmStartTime.getTimeInMillis(), 999999999, pendingIntentScreen);
 
-        ComponentName receiver2 = new ComponentName(TimerActivity.this, MyReceiverAlarmScreen.class);
-        PackageManager pm2 = getPackageManager();
+        ComponentName receiver = new ComponentName(TimerActivity.this, MyReceiverAlarmScreen.class);
+        PackageManager pm = getPackageManager();
 
-        pm2.setComponentEnabledSetting(receiver2, PackageManager.COMPONENT_ENABLED_STATE_ENABLED, PackageManager.DONT_KILL_APP);
+        pm.setComponentEnabledSetting(receiver, PackageManager.COMPONENT_ENABLED_STATE_ENABLED, PackageManager.DONT_KILL_APP);
 
-        SharedPreferences.Editor editor = getSharedPreferences("total_stop_screen", MODE_PRIVATE).edit();
-        editor.putInt("screen", 1);
-        editor.apply();
+        getSharedPref("total_stop_screen", "screen", 1);
     }
 
     private void startAlarmRest() {
-        SharedPreferences prefs = getSharedPreferences("total_val_rest", MODE_PRIVATE);
+        prefs = getSharedPreferences("total_val_rest", MODE_PRIVATE);
         int idNumRest = prefs.getInt("total_rest", 3);
 
         Calendar cal = Calendar.getInstance();
@@ -479,21 +461,12 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
             hours4 = hours3;
         }
 
-        ComponentName receiver = new ComponentName(TimerActivity.this, MyReceiverAlarmRest.class);
-        PackageManager pm = getPackageManager();
-
-        pm.setComponentEnabledSetting(receiver, PackageManager.COMPONENT_ENABLED_STATE_ENABLED, PackageManager.DONT_KILL_APP);
-
         Intent alarmIntent = new Intent(TimerActivity.this, MyReceiverAlarmRest.class); // AlarmReceiver1 = broadcast receiver
         pendingIntentRest = PendingIntent.getBroadcast(TimerActivity.this, 3, alarmIntent, PendingIntent.FLAG_UPDATE_CURRENT);
         alarmManagerRest = (AlarmManager) getSystemService(ALARM_SERVICE);
         alarmIntent.setData((Uri.parse("custom://" + System.currentTimeMillis())));
 
-        SharedPreferences.Editor editor2 = getSharedPreferences("total_time_rest", MODE_PRIVATE).edit();
-        editor2.putInt("time_rest_hour", hours4);
-        editor2.putInt("time_rest_min", mins3);
-        editor2.putInt("time_rest_sec", secs2);
-        editor2.apply();
+        getSharedPrefMulti("total_time_rest", "time_rest_hour", "time_rest_min", "time_rest_sec", hours4, mins3, secs2);
 
         Calendar alarmStartTime = Calendar.getInstance();
         Calendar now = Calendar.getInstance();
@@ -505,31 +478,20 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
         }
         alarmManagerRest.setRepeating(AlarmManager.RTC_WAKEUP, alarmStartTime.getTimeInMillis(), 999999999, pendingIntentRest);
 
-        ComponentName receiver2 = new ComponentName(TimerActivity.this, MyReceiverAlarmRest.class);
-        PackageManager pm2 = getPackageManager();
+        ComponentName receiver = new ComponentName(TimerActivity.this, MyReceiverAlarmRest.class);
+        PackageManager pm = getPackageManager();
 
-        pm2.setComponentEnabledSetting(receiver2, PackageManager.COMPONENT_ENABLED_STATE_ENABLED, PackageManager.DONT_KILL_APP);
+        pm.setComponentEnabledSetting(receiver, PackageManager.COMPONENT_ENABLED_STATE_ENABLED, PackageManager.DONT_KILL_APP);
 
-        SharedPreferences.Editor editor = getSharedPreferences("total_stop_rest", MODE_PRIVATE).edit();
-        editor.putInt("rest", 1);
-        editor.apply();
-
-        SharedPreferences.Editor editor3 = getSharedPreferences("total_stop_screen_me", MODE_PRIVATE).edit();
-        editor3.putInt("screen_me", 900000);
-        editor3.apply();
+        getSharedPref("total_stop_rest", "rest", 1);
+        getSharedPref("total_stop_screen_me", "screen_me", 900000);
     }
 
     private void stopAlarmScreen() {
-        SharedPreferences.Editor editor = getSharedPreferences("total_stop_screen", MODE_PRIVATE).edit();
-        editor.putInt("screen", 900000);
-        editor.apply();
+        getSharedPref("total_stop_screen", "screen", 900000);
 
-        SharedPreferences prefs = getSharedPreferences("total_stop_screen", MODE_PRIVATE);
+        prefs = getSharedPreferences("total_stop_screen", MODE_PRIVATE);
         int idNumStopScreen = prefs.getInt("screen", 900000);
-
-        ComponentName receiver = new ComponentName(TimerActivity.this, MyReceiverAlarmScreen.class);
-        PackageManager pm = getPackageManager();
-        pm.setComponentEnabledSetting(receiver, PackageManager.COMPONENT_ENABLED_STATE_DISABLED, PackageManager.DONT_KILL_APP);
 
         Intent alarmIntent = new Intent(TimerActivity.this, MyReceiverAlarmScreen.class); // AlarmReceiver1 = broadcast receiver
         pendingIntentScreen = PendingIntent.getBroadcast(TimerActivity.this, 1, alarmIntent, PendingIntent.FLAG_UPDATE_CURRENT);
@@ -554,22 +516,17 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
             }
         }
 
-        ComponentName receiver2 = new ComponentName(TimerActivity.this, MyReceiverAlarmScreen.class);
-        PackageManager pm2 = getPackageManager();
-        pm2.setComponentEnabledSetting(receiver2, PackageManager.COMPONENT_ENABLED_STATE_DISABLED, PackageManager.DONT_KILL_APP);
+        ComponentName receiver = new ComponentName(TimerActivity.this, MyReceiverAlarmScreen.class);
+        PackageManager pm = getPackageManager();
+
+        pm.setComponentEnabledSetting(receiver, PackageManager.COMPONENT_ENABLED_STATE_DISABLED, PackageManager.DONT_KILL_APP);
     }
 
     private void stopAlarmRest() {
-        SharedPreferences.Editor editor = getSharedPreferences("total_stop_rest", MODE_PRIVATE).edit();
-        editor.putInt("rest", 900000);
-        editor.apply();
+        getSharedPref("total_stop_rest", "rest", 900000);
 
-        SharedPreferences prefs = getSharedPreferences("total_stop_rest", MODE_PRIVATE);
+        prefs = getSharedPreferences("total_stop_rest", MODE_PRIVATE);
         int idNumStopRest = prefs.getInt("rest", 900000);
-
-        ComponentName receiver = new ComponentName(TimerActivity.this, MyReceiverAlarmRest.class);
-        PackageManager pm = getPackageManager();
-        pm.setComponentEnabledSetting(receiver, PackageManager.COMPONENT_ENABLED_STATE_DISABLED, PackageManager.DONT_KILL_APP);
 
         Intent alarmIntent = new Intent(TimerActivity.this, MyReceiverAlarmRest.class); // AlarmReceiver1 = broadcast receiver
         pendingIntentRest = PendingIntent.getBroadcast(TimerActivity.this, 3, alarmIntent, PendingIntent.FLAG_UPDATE_CURRENT);
@@ -594,13 +551,14 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
             }
         }
 
-        ComponentName receiver2 = new ComponentName(TimerActivity.this, MyReceiverAlarmRest.class);
-        PackageManager pm2 = getPackageManager();
-        pm2.setComponentEnabledSetting(receiver2, PackageManager.COMPONENT_ENABLED_STATE_DISABLED, PackageManager.DONT_KILL_APP);
+        ComponentName receiver = new ComponentName(TimerActivity.this, MyReceiverAlarmRest.class);
+        PackageManager pm = getPackageManager();
+
+        pm.setComponentEnabledSetting(receiver, PackageManager.COMPONENT_ENABLED_STATE_DISABLED, PackageManager.DONT_KILL_APP);
     }
 
     private void myTextValueScreen() {
-        SharedPreferences prefs = getSharedPreferences("total_val_screen", MODE_PRIVATE);
+        prefs = getSharedPreferences("total_val_screen", MODE_PRIVATE);
         float idNum = prefs.getFloat("total_screen", (float) 1000.0);
 
         timeCountInMilliSecondsScreen = (long) (30 * 60 * idNum);
@@ -629,7 +587,7 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
     }
 
     private void myTextValueRest() {
-        SharedPreferences prefs = getSharedPreferences("total_val_rest", MODE_PRIVATE);
+        prefs = getSharedPreferences("total_val_rest", MODE_PRIVATE);
         int idNumRest = prefs.getInt("total_rest", 3);
 
         timeCountInMilliSecondsRest = (long) (60 * 1000 * idNumRest);
@@ -658,14 +616,14 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
     }
 
     private void setTimerValuesScreen() {
-        SharedPreferences prefs = getSharedPreferences("total_val_screen", MODE_PRIVATE);
+        prefs = getSharedPreferences("total_val_screen", MODE_PRIVATE);
         float idNum = prefs.getFloat("total_screen", (float) 1000.0);
 
         timeCountInMilliSecondsScreen = (long) (30 * 60 * idNum);
     }
 
     private void setTimerValuesRest() {
-        SharedPreferences prefs = getSharedPreferences("total_val_rest", MODE_PRIVATE);
+        prefs = getSharedPreferences("total_val_rest", MODE_PRIVATE);
         int idNumRest = prefs.getInt("total_rest", 3);
 
         timeCountInMilliSecondsRest = (long) (60 * 1000 * idNumRest);
@@ -702,13 +660,8 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
 
                 imageViewStartStopRest.setImageResource(R.drawable.icon_start_rest);
 
-                SharedPreferences.Editor editor = getSharedPreferences("total_stop_screen", MODE_PRIVATE).edit();
-                editor.putInt("screen", 900000);
-                editor.apply();
-
-                SharedPreferences.Editor editor2 = getSharedPreferences("total_stop_screen_me", MODE_PRIVATE).edit();
-                editor2.putInt("screen_me", 900000);
-                editor2.apply();
+                getSharedPref("total_stop_screen", "screen", 900000);
+                getSharedPref("total_stop_screen_me", "screen_me", 900000);
             }
         }.start();
         countDownTimerScreen.start();
@@ -745,13 +698,8 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
 
                 imageViewStartStopScreen.setImageResource(R.drawable.icon_start_screen);
 
-                SharedPreferences.Editor editor = getSharedPreferences("total_stop_rest", MODE_PRIVATE).edit();
-                editor.putInt("rest", 900000);
-                editor.apply();
-
-                SharedPreferences.Editor editor2 = getSharedPreferences("total_stop_rest_me", MODE_PRIVATE).edit();
-                editor2.putInt("rest_me", 900000);
-                editor2.apply();
+                getSharedPref("total_stop_rest", "rest", 900000);
+                getSharedPref("total_stop_rest_me", "rest_me", 900000);
 
                 Toast toast = Toast.makeText(TimerActivity.this, getString(R.string.restart_details), Toast.LENGTH_LONG);
                 View view = toast.getView();
@@ -798,6 +746,20 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
                 TimeUnit.MILLISECONDS.toMinutes(milliSeconds) - TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(milliSeconds)),
                 TimeUnit.MILLISECONDS.toSeconds(milliSeconds) - TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(milliSeconds)));
         return hms;
+    }
+
+    private void getSharedPref(String name, String key, int val) {
+        editor = getSharedPreferences(name, MODE_PRIVATE).edit();
+        editor.putInt(key, val);
+        editor.apply();
+    }
+
+    private void getSharedPrefMulti(String name, String key1, String key2, String key3, int val1, int val2, int val3) {
+        editor = getSharedPreferences(name, MODE_PRIVATE).edit();
+        editor.putInt(key1, val1);
+        editor.putInt(key2, val2);
+        editor.putInt(key3, val3);
+        editor.apply();
     }
 
 }
