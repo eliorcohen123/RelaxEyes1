@@ -39,6 +39,7 @@ public class DetailsOnClient extends AppCompatActivity implements NavigationView
     private DrawerLayout drawer;
     private ArrayAdapter<String> spinnerArrayAdapterAge, spinnerArrayAdapterSex, spinnerArrayAdapterScreen, spinnerArrayAdapterRest;
     private SharedPreferences.Editor editor;
+    private SharedPreferences prefs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -112,7 +113,7 @@ public class DetailsOnClient extends AppCompatActivity implements NavigationView
     }
 
     private void checkStopScreen() {
-        SharedPreferences prefs = getSharedPreferences("total_stop_screen", MODE_PRIVATE);
+        prefs = getSharedPreferences("total_stop_screen", MODE_PRIVATE);
         int idNumStopScreen = prefs.getInt("screen", 900000);
 
         if (idNumStopScreen == 1) {
@@ -122,7 +123,7 @@ public class DetailsOnClient extends AppCompatActivity implements NavigationView
     }
 
     private void checkStopRest() {
-        SharedPreferences prefs = getSharedPreferences("total_stop_rest", MODE_PRIVATE);
+        prefs = getSharedPreferences("total_stop_rest", MODE_PRIVATE);
         int idNumStopRest = prefs.getInt("rest", 900000);
 
         if (idNumStopRest == 1) {
