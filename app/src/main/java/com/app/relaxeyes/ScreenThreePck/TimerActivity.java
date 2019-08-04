@@ -194,6 +194,8 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
                 imageStopScreen.setVisibility(View.GONE);
                 textViewAlarmTimeScreen.setVisibility(View.GONE);
 
+                stopAlarmScreen();
+
                 delData();
 
                 onBackPressed();
@@ -201,6 +203,8 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
             case R.id.imageStopRest:
                 imageStopRest.setVisibility(View.GONE);
                 textViewAlarmTimeRest.setVisibility(View.GONE);
+
+                stopAlarmRest();
 
                 delData();
 
