@@ -23,7 +23,7 @@ public class MyReceiverAlarmRest extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
         final int NOTIFY_ID = 3; // ID of notification
         String id = "3"; // default_channel_id
-        String title = "ריענון עיניים"; // Default Channel
+        String title = "רענון עיניים"; // Default Channel
         if (notificationManager == null) {
             notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         }
@@ -49,7 +49,7 @@ public class MyReceiverAlarmRest extends BroadcastReceiver {
         Intent intent = new Intent(context, TimerActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
         pendingIntent = PendingIntent.getActivity(context, 3, intent, 0);
-        builder.setContentTitle("ריענון עיניים")
+        builder.setContentTitle("רענון עיניים")
                 .setContentText("היי… הסתיים זמן הרענון :)")  // required
                 .setSmallIcon(R.drawable.eye_icon)  // required
                 .setDefaults(Notification.DEFAULT_ALL)
