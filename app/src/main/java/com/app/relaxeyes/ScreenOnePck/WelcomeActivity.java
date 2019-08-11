@@ -21,7 +21,7 @@ import android.widget.TextView;
 import com.app.relaxeyes.ScreenTwoPck.DetailsOnClient;
 import com.app.relaxeyes.R;
 
-public class WelcomeActivity extends AppCompatActivity {
+public class WelcomeActivity extends AppCompatActivity implements View.OnClickListener {
 
     private ViewPager viewPager;
     private MyViewPagerAdapter myViewPagerAdapter;
@@ -50,42 +50,31 @@ public class WelcomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_welcome);
 
         initUI();
-
-        // layouts of all welcome sliders
-        // add few more layouts if you want
-        layouts = new int[]{
-                R.layout.slide_screen1};
+        initListeners();
+        initLayout();
 
         // adding bottom dots
         addBottomDots(0);
 
         // making notification bar transparent
         changeStatusBarColor();
-
-        myViewPagerAdapter = new MyViewPagerAdapter();
-        viewPager.setAdapter(myViewPagerAdapter);
-        viewPager.addOnPageChangeListener(viewPagerPageChangeListener);
-
-        btnStart.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // checking for last page
-                // if last page home screen will be launched
-                int current = getItem(+1);
-                if (current < layouts.length) {
-                    // move to next screen
-                    viewPager.setCurrentItem(current);
-                } else {
-                    launchHomeScreen();
-                }
-            }
-        });
+        initAdapter();
     }
 
     private void initUI() {
         viewPager = findViewById(R.id.view_pager);
         dotsLayout = findViewById(R.id.layoutDots);
         btnStart = findViewById(R.id.btn_start);
+    }
+
+    private void initListeners() {
+        btnStart.setOnClickListener(this);
+    }
+
+    private void initLayout() {
+        // layouts of all welcome sliders
+        // add few more layouts if you want
+        layouts = new int[]{R.layout.slide_screen1};
     }
 
     private void addBottomDots(int currentPage) {
@@ -149,6 +138,12 @@ public class WelcomeActivity extends AppCompatActivity {
         }
     }
 
+    private void initAdapter() {
+        myViewPagerAdapter = new MyViewPagerAdapter();
+        viewPager.setAdapter(myViewPagerAdapter);
+        viewPager.addOnPageChangeListener(viewPagerPageChangeListener);
+    }
+
     /**
      * View pager adapter
      */
@@ -183,6 +178,21 @@ public class WelcomeActivity extends AppCompatActivity {
         public void destroyItem(ViewGroup container, int position, Object object) {
             View view = (View) object;
             container.removeView(view);
+        }
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.btn_start:
+                int current = getItem(+1);
+                if (current < layouts.length) {
+                    // move to next screen
+                    viewPager.setCurrentItem(current);
+                } else {
+                    launchHomeScreen();
+                }
+                break;
         }
     }
 

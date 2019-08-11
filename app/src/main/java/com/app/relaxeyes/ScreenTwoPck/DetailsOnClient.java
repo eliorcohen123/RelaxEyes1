@@ -22,7 +22,7 @@ import com.app.relaxeyes.R;
 import com.app.relaxeyes.ScreenOnePck.WelcomeActivityRegulations;
 import com.app.relaxeyes.ScreenThreePck.TimerActivity;
 
-public class DetailsOnClient extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class DetailsOnClient extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
 
     private Spinner spinnerAge, spinnerSex, spinnerScreen, spinnerRest;
     private Button btn_pass_data;
@@ -47,10 +47,10 @@ public class DetailsOnClient extends AppCompatActivity implements NavigationView
         setContentView(R.layout.activity_client);
 
         initUI();
+        initListeners();
         checkStopScreen();
         checkStopRest();
         initSpinner();
-        submitData();
         myDrawerLayout();
     }
 
@@ -65,6 +65,10 @@ public class DetailsOnClient extends AppCompatActivity implements NavigationView
         toolbar = findViewById(R.id.toolbar);
         drawer = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.nav_view);
+    }
+
+    private void initListeners() {
+        btn_pass_data.setOnClickListener(this);
     }
 
     private void myDrawerLayout() {
@@ -154,10 +158,22 @@ public class DetailsOnClient extends AppCompatActivity implements NavigationView
         spinnerRest.setAdapter(spinnerArrayAdapterRest);
     }
 
-    public void submitData() {
-        btn_pass_data.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+    private void getSharedPrefScreen(String name, String key, double val) {
+        editor = getSharedPreferences(name, MODE_PRIVATE).edit();
+        editor.putFloat(key, (float) val);
+        editor.apply();
+    }
+
+    private void getSharedPrefRest(String name, String key, int val) {
+        editor = getSharedPreferences(name, MODE_PRIVATE).edit();
+        editor.putInt(key, val);
+        editor.apply();
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.pass_data:
                 double yourValAge = 0.0;
                 if (!(spinnerAge.getSelectedItem().toString().equals("גיל:"))) {
                     int ageMy = Integer.parseInt(String.valueOf(spinnerAge.getSelectedItem()));
@@ -240,20 +256,8 @@ public class DetailsOnClient extends AppCompatActivity implements NavigationView
                     Intent intent = new Intent(DetailsOnClient.this, TimerActivity.class);
                     startActivity(intent);
                 }
-            }
-        });
-    }
-
-    private void getSharedPrefScreen(String name, String key, double val) {
-        editor = getSharedPreferences(name, MODE_PRIVATE).edit();
-        editor.putFloat(key, (float) val);
-        editor.apply();
-    }
-
-    private void getSharedPrefRest(String name, String key, int val) {
-        editor = getSharedPreferences(name, MODE_PRIVATE).edit();
-        editor.putInt(key, val);
-        editor.apply();
+                break;
+        }
     }
 
 }
