@@ -54,6 +54,7 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
     private NotificationManager notificationManagerScreen, notificationManagerRest;
     private SharedPreferences.Editor editor;
     private SharedPreferences prefs;
+    private Calendar alarmStartTime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -216,6 +217,7 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
     }
 
     private void delData() {
+        prefs.edit().clear().commit();
         getSharedPref("total_stop_screen", "screen", 900000);
         getSharedPref("total_stop_rest", "rest", 900000);
     }
@@ -355,7 +357,7 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
         int currentMinutes = cal.get(Calendar.MINUTE);
         int currentSeconds = cal.get(Calendar.SECOND);
 
-        timeCountInMilliSecondsScreen = (long) (30 * 60 * idNum);
+        timeCountInMilliSecondsScreen = (long) (30 * idNum);
         int hours = (int) timeCountInMilliSecondsScreen / 3600000;
         int temp = (int) timeCountInMilliSecondsScreen - hours * 3600000;
         int mins = temp / 60000;
@@ -400,7 +402,7 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
 
         getSharedPrefMulti("total_time_screen", "time_screen_hour", "time_screen_min", "time_screen_sec", hours4, mins3, secs2);
 
-        Calendar alarmStartTime = Calendar.getInstance();
+        alarmStartTime = Calendar.getInstance();
         Calendar now = Calendar.getInstance();
         alarmStartTime.set(Calendar.HOUR_OF_DAY, hours4);
         alarmStartTime.set(Calendar.MINUTE, mins3);
@@ -472,7 +474,7 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
 
         getSharedPrefMulti("total_time_rest", "time_rest_hour", "time_rest_min", "time_rest_sec", hours4, mins3, secs2);
 
-        Calendar alarmStartTime = Calendar.getInstance();
+        alarmStartTime = Calendar.getInstance();
         Calendar now = Calendar.getInstance();
         alarmStartTime.set(Calendar.HOUR_OF_DAY, hours4);
         alarmStartTime.set(Calendar.MINUTE, mins3);
@@ -494,22 +496,6 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
     private void stopAlarmScreen() {
         getSharedPref("total_stop_screen", "screen", 900000);
 
-        prefs = getSharedPreferences("total_stop_screen", MODE_PRIVATE);
-        int idNumStopScreen = prefs.getInt("screen", 900000);
-
-        Intent alarmIntent = new Intent(TimerActivity.this, MyReceiverAlarmScreen.class); // AlarmReceiver1 = broadcast receiver
-        pendingIntentScreen = PendingIntent.getBroadcast(TimerActivity.this, 1, alarmIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-        alarmManagerScreen = (AlarmManager) getSystemService(ALARM_SERVICE);
-        alarmIntent.setData((Uri.parse("custom://" + System.currentTimeMillis())));
-
-        Calendar alarmStartTime = Calendar.getInstance();
-        Calendar now = Calendar.getInstance();
-        alarmStartTime.set(Calendar.HOUR_OF_DAY, idNumStopScreen);
-        alarmStartTime.set(Calendar.MINUTE, idNumStopScreen);
-        alarmStartTime.set(Calendar.SECOND, idNumStopScreen);
-        if (now.after(alarmStartTime)) {
-            alarmStartTime.add(Calendar.DATE, 1);
-        }
         alarmManagerScreen.cancel(pendingIntentScreen);
 
         if (notificationManagerScreen != null) {
@@ -529,22 +515,11 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
     private void stopAlarmRest() {
         getSharedPref("total_stop_rest", "rest", 900000);
 
-        prefs = getSharedPreferences("total_stop_rest", MODE_PRIVATE);
-        int idNumStopRest = prefs.getInt("rest", 900000);
-
         Intent alarmIntent = new Intent(TimerActivity.this, MyReceiverAlarmRest.class); // AlarmReceiver1 = broadcast receiver
         pendingIntentRest = PendingIntent.getBroadcast(TimerActivity.this, 3, alarmIntent, PendingIntent.FLAG_UPDATE_CURRENT);
         alarmManagerRest = (AlarmManager) getSystemService(ALARM_SERVICE);
         alarmIntent.setData((Uri.parse("custom://" + System.currentTimeMillis())));
 
-        Calendar alarmStartTime = Calendar.getInstance();
-        Calendar now = Calendar.getInstance();
-        alarmStartTime.set(Calendar.HOUR_OF_DAY, idNumStopRest);
-        alarmStartTime.set(Calendar.MINUTE, idNumStopRest);
-        alarmStartTime.set(Calendar.SECOND, idNumStopRest);
-        if (now.after(alarmStartTime)) {
-            alarmStartTime.add(Calendar.DATE, 1);
-        }
         alarmManagerRest.cancel(pendingIntentRest);
 
         if (notificationManagerRest != null) {
@@ -565,7 +540,7 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
         prefs = getSharedPreferences("total_val_screen", MODE_PRIVATE);
         float idNum = prefs.getFloat("total_screen", (float) 1000.0);
 
-        timeCountInMilliSecondsScreen = (long) (30 * 60 * idNum);
+        timeCountInMilliSecondsScreen = (long) (30 * idNum);
         int hours = (int) timeCountInMilliSecondsScreen / 3600000;
         int temp = (int) timeCountInMilliSecondsScreen - hours * 3600000;
         int mins = temp / 60000;
@@ -623,7 +598,7 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
         prefs = getSharedPreferences("total_val_screen", MODE_PRIVATE);
         float idNum = prefs.getFloat("total_screen", (float) 1000.0);
 
-        timeCountInMilliSecondsScreen = (long) (30 * 60 * idNum);
+        timeCountInMilliSecondsScreen = (long) (30 * idNum);
     }
 
     private void setTimerValuesRest() {
