@@ -357,7 +357,7 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
         int currentMinutes = cal.get(Calendar.MINUTE);
         int currentSeconds = cal.get(Calendar.SECOND);
 
-        timeCountInMilliSecondsScreen = (long) (30 * idNum);
+        timeCountInMilliSecondsScreen = (long) (30 * 60 * idNum);
         int hours = (int) timeCountInMilliSecondsScreen / 3600000;
         int temp = (int) timeCountInMilliSecondsScreen - hours * 3600000;
         int mins = temp / 60000;
@@ -540,7 +540,7 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
         prefs = getSharedPreferences("total_val_screen", MODE_PRIVATE);
         float idNum = prefs.getFloat("total_screen", (float) 1000.0);
 
-        timeCountInMilliSecondsScreen = (long) (30 * idNum);
+        timeCountInMilliSecondsScreen = (long) (30 * 60 * idNum);
         int hours = (int) timeCountInMilliSecondsScreen / 3600000;
         int temp = (int) timeCountInMilliSecondsScreen - hours * 3600000;
         int mins = temp / 60000;
@@ -598,7 +598,7 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
         prefs = getSharedPreferences("total_val_screen", MODE_PRIVATE);
         float idNum = prefs.getFloat("total_screen", (float) 1000.0);
 
-        timeCountInMilliSecondsScreen = (long) (30 * idNum);
+        timeCountInMilliSecondsScreen = (long) (30 * 60 * idNum);
     }
 
     private void setTimerValuesRest() {
