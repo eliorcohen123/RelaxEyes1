@@ -217,7 +217,7 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
     }
 
     private void delData() {
-        prefs.edit().clear().commit();
+        prefs.edit().clear().apply();
         getSharedPref("total_stop_screen", "screen", 900000);
         getSharedPref("total_stop_rest", "rest", 900000);
     }
