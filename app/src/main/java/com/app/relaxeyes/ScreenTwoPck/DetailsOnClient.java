@@ -2,6 +2,7 @@ package com.app.relaxeyes.ScreenTwoPck;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -21,6 +22,8 @@ import android.widget.Toast;
 import com.app.relaxeyes.R;
 import com.app.relaxeyes.ScreenOnePck.WelcomeActivityRegulations;
 import com.app.relaxeyes.ScreenThreePck.TimerActivity;
+
+import guy4444.smartrate.SmartRate;
 
 public class DetailsOnClient extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
 
@@ -48,6 +51,7 @@ public class DetailsOnClient extends AppCompatActivity implements NavigationView
 
         initUI();
         initListeners();
+        initAppRater();
         checkStopScreen();
         checkStopRest();
         initSpinner();
@@ -69,6 +73,24 @@ public class DetailsOnClient extends AppCompatActivity implements NavigationView
 
     private void initListeners() {
         btn_pass_data.setOnClickListener(this);
+    }
+
+    private void initAppRater() {
+        SmartRate.Rate(DetailsOnClient.this
+                , "Rate Us"
+                , "Tell others what you think about this app"
+                , "Continue"
+                , "Please take a moment and rate us on Google Play"
+                , "click here"
+                , "Ask me later"
+                , "Never ask again"
+                , "Cancel"
+                , "Thanks for the feedback"
+                , Color.parseColor("#2196F3")
+                , 5
+                , 1
+                , 1
+        );
     }
 
     private void myDrawerLayout() {
