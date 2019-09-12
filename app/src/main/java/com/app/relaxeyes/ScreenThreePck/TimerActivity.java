@@ -395,7 +395,7 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
             hours4 = hours3;
         }
 
-        Intent alarmIntent = new Intent(TimerActivity.this, MyReceiverAlarmScreen.class); // AlarmReceiver1 = broadcast receiver
+        Intent alarmIntent = new Intent(TimerActivity.this, MyReceiverAlarmScreen.class); // MyReceiverAlarmScreen = broadcast receiver
         pendingIntentScreen = PendingIntent.getBroadcast(TimerActivity.this, 1, alarmIntent, PendingIntent.FLAG_UPDATE_CURRENT);
         alarmManagerScreen = (AlarmManager) getSystemService(ALARM_SERVICE);
         alarmIntent.setData((Uri.parse("custom://" + System.currentTimeMillis())));
@@ -467,7 +467,7 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
             hours4 = hours3;
         }
 
-        Intent alarmIntent = new Intent(TimerActivity.this, MyReceiverAlarmRest.class); // AlarmReceiver1 = broadcast receiver
+        Intent alarmIntent = new Intent(TimerActivity.this, MyReceiverAlarmRest.class); // MyReceiverAlarmRest = broadcast receiver
         pendingIntentRest = PendingIntent.getBroadcast(TimerActivity.this, 3, alarmIntent, PendingIntent.FLAG_UPDATE_CURRENT);
         alarmManagerRest = (AlarmManager) getSystemService(ALARM_SERVICE);
         alarmIntent.setData((Uri.parse("custom://" + System.currentTimeMillis())));
@@ -496,6 +496,11 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
     private void stopAlarmScreen() {
         getSharedPref("total_stop_screen", "screen", 900000);
 
+        Intent alarmIntent = new Intent(TimerActivity.this, MyReceiverAlarmScreen.class); // MyReceiverAlarmRest = broadcast receiver
+        pendingIntentScreen = PendingIntent.getBroadcast(TimerActivity.this, 1, alarmIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+        alarmManagerScreen = (AlarmManager) getSystemService(ALARM_SERVICE);
+        alarmIntent.setData((Uri.parse("custom://" + System.currentTimeMillis())));
+
         alarmManagerScreen.cancel(pendingIntentScreen);
 
         if (notificationManagerScreen != null) {
@@ -515,7 +520,7 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
     private void stopAlarmRest() {
         getSharedPref("total_stop_rest", "rest", 900000);
 
-        Intent alarmIntent = new Intent(TimerActivity.this, MyReceiverAlarmRest.class); // AlarmReceiver1 = broadcast receiver
+        Intent alarmIntent = new Intent(TimerActivity.this, MyReceiverAlarmRest.class); // MyReceiverAlarmRest = broadcast receiver
         pendingIntentRest = PendingIntent.getBroadcast(TimerActivity.this, 3, alarmIntent, PendingIntent.FLAG_UPDATE_CURRENT);
         alarmManagerRest = (AlarmManager) getSystemService(ALARM_SERVICE);
         alarmIntent.setData((Uri.parse("custom://" + System.currentTimeMillis())));
