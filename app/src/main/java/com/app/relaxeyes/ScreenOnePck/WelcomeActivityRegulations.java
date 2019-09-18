@@ -88,8 +88,8 @@ public class WelcomeActivityRegulations extends AppCompatActivity implements Vie
             dots[currentPage].setTextColor(colorsActive[currentPage]);
     }
 
-    private int getItem(int i) {
-        return viewPager.getCurrentItem() + i;
+    private int getItem() {
+        return viewPager.getCurrentItem() + 1;
     }
 
     private void launchHomeScreen() {
@@ -177,7 +177,7 @@ public class WelcomeActivityRegulations extends AppCompatActivity implements Vie
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_start:
-                int current = getItem(+1);
+                int current = getItem();
                 if (current < layouts.length) {
                     // move to next screen
                     viewPager.setCurrentItem(current);
