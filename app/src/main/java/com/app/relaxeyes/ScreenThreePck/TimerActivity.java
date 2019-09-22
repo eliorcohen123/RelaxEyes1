@@ -734,8 +734,7 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
 
     private void getSharedPref(String name, String key, int val) {
         editor = getSharedPreferences(name, MODE_PRIVATE).edit();
-        editor.putInt(key, val);
-        editor.apply();
+        editor.putInt(key, val).apply();
     }
 
     private void getSharedPrefMulti(String name, String key1, String key2, String key3, int val1, int val2, int val3) {

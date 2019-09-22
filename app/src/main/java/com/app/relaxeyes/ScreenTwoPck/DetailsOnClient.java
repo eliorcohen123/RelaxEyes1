@@ -176,16 +176,14 @@ public class DetailsOnClient extends AppCompatActivity implements NavigationView
         spinnerRest.setAdapter(spinnerArrayAdapterRest);
     }
 
-    private void getSharedPrefScreen(String name, String key, double val) {
-        editor = getSharedPreferences(name, MODE_PRIVATE).edit();
-        editor.putFloat(key, (float) val);
-        editor.apply();
+    private void getSharedPrefScreen(double val) {
+        editor = getSharedPreferences("total_val_screen", MODE_PRIVATE).edit();
+        editor.putFloat("total_screen", (float) val).apply();
     }
 
-    private void getSharedPrefRest(String name, String key, int val) {
-        editor = getSharedPreferences(name, MODE_PRIVATE).edit();
-        editor.putInt(key, val);
-        editor.apply();
+    private void getSharedPrefRest(int val) {
+        editor = getSharedPreferences("total_val_rest", MODE_PRIVATE).edit();
+        editor.putInt("total_rest", val).apply();
     }
 
     @Override
@@ -268,8 +266,8 @@ public class DetailsOnClient extends AppCompatActivity implements NavigationView
                     text.setTextColor(getResources().getColor(R.color.colorYellow));
                     toast.show();
                 } else {
-                    getSharedPrefScreen("total_val_screen", "total_screen", yourValTotal);
-                    getSharedPrefRest("total_val_rest", "total_rest", yourValMins);
+                    getSharedPrefScreen(yourValTotal);
+                    getSharedPrefRest(yourValMins);
 
                     Intent intent = new Intent(DetailsOnClient.this, TimerActivity.class);
                     startActivity(intent);
