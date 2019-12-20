@@ -193,7 +193,7 @@ public class DetailsOnClient extends AppCompatActivity implements NavigationView
             case R.id.pass_data:
                 double yourValAge = 0.0;
                 if (!(spinnerAge.getSelectedItem().toString().equals("גיל:"))) {
-                    int ageMy = Integer.parseInt(String.valueOf(spinnerAge.getSelectedItem()));
+                    int ageMy = Integer.parseInt(spinnerAge.getSelectedItem().toString());
                     if (ageMy <= 99 && ageMy >= 65) {
                         yourValAge = 0.9;
                     } else if (ageMy <= 64 && ageMy >= 40) {
@@ -258,8 +258,8 @@ public class DetailsOnClient extends AppCompatActivity implements NavigationView
                     }
                 }
 
-                if (spinnerAge.getSelectedItem() == "גיל:" || spinnerSex.getSelectedItem() == "מין:" ||
-                        spinnerScreen.getSelectedItem() == "מסך:" || spinnerRest.getSelectedItem() == "דקות:") {
+                if (spinnerAge.getSelectedItem().toString().equals("גיל:") || spinnerSex.getSelectedItem().toString().equals("מין:") ||
+                        spinnerScreen.getSelectedItem().toString().equals("מסך:") || spinnerRest.getSelectedItem().toString().equals("דקות:")) {
                     Toast toast = Toast.makeText(DetailsOnClient.this, getString(R.string.fill_all_message), Toast.LENGTH_LONG);
                     View view = toast.getView();
                     view.getBackground().setColorFilter(getResources().getColor(R.color.colorPrimary), PorterDuff.Mode.SRC_IN);
