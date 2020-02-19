@@ -40,7 +40,6 @@ public class DetailsOnClient extends AppCompatActivity implements NavigationView
     private Toolbar toolbar;
     private NavigationView navigationView;
     private DrawerLayout drawer;
-    private ArrayAdapter<String> spinnerArrayAdapterAge, spinnerArrayAdapterSex, spinnerArrayAdapterScreen, spinnerArrayAdapterRest;
     private SharedPreferences.Editor editor;
     private SharedPreferences prefs;
 
@@ -157,24 +156,19 @@ public class DetailsOnClient extends AppCompatActivity implements NavigationView
 
     private void initSpinner() {
         // spinnerAge
-        spinnerArrayAdapterAge = new ArrayAdapter<String>(this, R.layout.spinner_item, age_arrays);
-        spinnerArrayAdapterAge.setDropDownViewResource(R.layout.simple_spinner_dropdown_item); // The drop down view
-        spinnerAge.setAdapter(spinnerArrayAdapterAge);
-
+        createSpinner(age_arrays, spinnerAge);
         // spinnerSex
-        spinnerArrayAdapterSex = new ArrayAdapter<String>(this, R.layout.spinner_item, sex_arrays);
-        spinnerArrayAdapterSex.setDropDownViewResource(R.layout.simple_spinner_dropdown_item); // The drop down view
-        spinnerSex.setAdapter(spinnerArrayAdapterSex);
-
+        createSpinner(sex_arrays, spinnerSex);
         // spinnerScreen
-        spinnerArrayAdapterScreen = new ArrayAdapter<String>(this, R.layout.spinner_item, screen_arrays);
-        spinnerArrayAdapterScreen.setDropDownViewResource(R.layout.simple_spinner_dropdown_item); // The drop down view
-        spinnerScreen.setAdapter(spinnerArrayAdapterScreen);
-
+        createSpinner(screen_arrays, spinnerScreen);
         // spinnerRest
-        spinnerArrayAdapterRest = new ArrayAdapter<String>(this, R.layout.spinner_item, rest_arrays);
-        spinnerArrayAdapterRest.setDropDownViewResource(R.layout.simple_spinner_dropdown_item); // The drop down view
-        spinnerRest.setAdapter(spinnerArrayAdapterRest);
+        createSpinner(rest_arrays, spinnerRest);
+    }
+
+    private void createSpinner(String[] strings, Spinner spinner) {
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, R.layout.spinner_item, strings);
+        arrayAdapter.setDropDownViewResource(R.layout.simple_spinner_dropdown_item); // The drop down view
+        spinner.setAdapter(arrayAdapter);
     }
 
     private void getSharedPrefScreen(double val) {
