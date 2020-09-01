@@ -1,4 +1,4 @@
-package com.app.relaxeyes.ScreenThreePck;
+package com.app.relaxeyes.PagesPackage;
 
 import android.app.AlarmManager;
 import android.app.NotificationManager;
@@ -20,9 +20,9 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.app.relaxeyes.BroadcastReceiverPck.MyReceiverAlarmRest;
+import com.app.relaxeyes.OthersPackage.MyReceiverAlarmRest;
 import com.app.relaxeyes.R;
-import com.app.relaxeyes.BroadcastReceiverPck.MyReceiverAlarmScreen;
+import com.app.relaxeyes.OthersPackage.MyReceiverAlarmScreen;
 
 import java.util.Calendar;
 import java.util.concurrent.TimeUnit;

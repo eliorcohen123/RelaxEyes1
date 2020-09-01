@@ -16,7 +16,7 @@
         android:supportsRtl="false"
         android:theme="@style/AppTheme">
         <activity
-            android:name="com.app.relaxeyes.ScreenOnePck.WelcomeActivity"
+            android:name="com.app.relaxeyes.PagesPackage.WelcomeActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -25,27 +25,27 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.app.relaxeyes.ScreenTwoPck.DetailsOnClient"
+            android:name="com.app.relaxeyes.PagesPackage.DetailsOnClientActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.app.relaxeyes.ScreenThreePck.TimerActivity"
+            android:name="com.app.relaxeyes.PagesPackage.TimerActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.app.relaxeyes.ScreenOnePck.WelcomeActivityRegulations"
+            android:name="com.app.relaxeyes.PagesPackage.WelcomeActivityRegulations"
             android:screenOrientation="portrait" />
 
         <receiver
-            android:name="com.app.relaxeyes.BroadcastReceiverPck.MyReceiverAlarmScreen"
+            android:name="com.app.relaxeyes.OthersPackage.MyReceiverAlarmScreen"
             android:enabled="true"
             android:exported="true"
             android:process=":remote" />
         <receiver
-            android:name="com.app.relaxeyes.BroadcastReceiverPck.MyReceiverAlarmRest"
+            android:name="com.app.relaxeyes.OthersPackage.MyReceiverAlarmRest"
             android:enabled="true"
             android:exported="true"
             android:process=":remote" />
 
-        <service android:name="com.app.relaxeyes.OtherPck.MyFirebaseMessagingService">
+        <service android:name="com.app.relaxeyes.OthersPackage.MyFirebaseMessagingService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>

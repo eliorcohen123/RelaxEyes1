@@ -1,4 +1,4 @@
-package com.app.relaxeyes.ScreenOnePck;
+package com.app.relaxeyes.PagesPackage;
 
 import android.content.Context;
 import android.content.Intent;
@@ -18,7 +18,6 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.app.relaxeyes.ScreenTwoPck.DetailsOnClient;
 import com.app.relaxeyes.R;
 
 public class WelcomeActivityRegulations extends AppCompatActivity implements View.OnClickListener {
@@ -93,7 +92,7 @@ public class WelcomeActivityRegulations extends AppCompatActivity implements Vie
     }
 
     private void launchHomeScreen() {
-        startActivity(new Intent(WelcomeActivityRegulations.this, DetailsOnClient.class));
+        startActivity(new Intent(WelcomeActivityRegulations.this, DetailsOnClientActivity.class));
         finish();
     }
 

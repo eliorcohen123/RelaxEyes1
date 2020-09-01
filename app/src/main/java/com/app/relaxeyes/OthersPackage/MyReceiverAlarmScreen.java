@@ -1,4 +1,4 @@
-package com.app.relaxeyes.BroadcastReceiverPck;
+package com.app.relaxeyes.OthersPackage;
 
 import android.app.Notification;
 import android.app.NotificationChannel;
@@ -11,7 +11,7 @@ import android.os.Build;
 import android.support.v4.app.NotificationCompat;
 
 import com.app.relaxeyes.R;
-import com.app.relaxeyes.ScreenThreePck.TimerActivity;
+import com.app.relaxeyes.PagesPackage.TimerActivity;
 
 public class MyReceiverAlarmScreen extends BroadcastReceiver {
 

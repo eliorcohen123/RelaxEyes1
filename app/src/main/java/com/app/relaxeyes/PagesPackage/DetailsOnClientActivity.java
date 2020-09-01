@@ -1,4 +1,4 @@
-package com.app.relaxeyes.ScreenTwoPck;
+package com.app.relaxeyes.PagesPackage;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -20,12 +20,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.app.relaxeyes.R;
-import com.app.relaxeyes.ScreenOnePck.WelcomeActivityRegulations;
-import com.app.relaxeyes.ScreenThreePck.TimerActivity;
 
 import guy4444.smartrate.SmartRate;
 
-public class DetailsOnClient extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
+public class DetailsOnClientActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
 
     private Spinner spinnerAge, spinnerSex, spinnerScreen, spinnerRest;
     private Button btn_pass_data;
@@ -75,7 +73,7 @@ public class DetailsOnClient extends AppCompatActivity implements NavigationView
     }
 
     private void initAppRater() {
-        SmartRate.Rate(DetailsOnClient.this
+        SmartRate.Rate(DetailsOnClientActivity.this
                 , "Rate Us"
                 , "Tell others what you think about this app"
                 , "Continue"
@@ -118,7 +116,7 @@ public class DetailsOnClient extends AppCompatActivity implements NavigationView
         // Handle navigation view item clicks here.
         int id = item.getItemId();
         if (id == R.id.regulations) {
-            Intent intentTutorial = new Intent(DetailsOnClient.this, WelcomeActivityRegulations.class);
+            Intent intentTutorial = new Intent(DetailsOnClientActivity.this, WelcomeActivityRegulations.class);
             startActivity(intentTutorial);
         } else if (id == R.id.shareIntent) {
             Intent sendIntent = new Intent();
@@ -139,7 +137,7 @@ public class DetailsOnClient extends AppCompatActivity implements NavigationView
         int idNumStopScreen = prefs.getInt("screen", 900000);
 
         if (idNumStopScreen == 1) {
-            Intent intent = new Intent(DetailsOnClient.this, TimerActivity.class);
+            Intent intent = new Intent(DetailsOnClientActivity.this, TimerActivity.class);
             startActivity(intent);
         }
     }
@@ -149,7 +147,7 @@ public class DetailsOnClient extends AppCompatActivity implements NavigationView
         int idNumStopRest = prefs.getInt("rest", 900000);
 
         if (idNumStopRest == 1) {
-            Intent intent = new Intent(DetailsOnClient.this, TimerActivity.class);
+            Intent intent = new Intent(DetailsOnClientActivity.this, TimerActivity.class);
             startActivity(intent);
         }
     }
@@ -254,7 +252,7 @@ public class DetailsOnClient extends AppCompatActivity implements NavigationView
 
                 if (spinnerAge.getSelectedItem().toString().equals("גיל:") || spinnerSex.getSelectedItem().toString().equals("מין:") ||
                         spinnerScreen.getSelectedItem().toString().equals("מסך:") || spinnerRest.getSelectedItem().toString().equals("דקות:")) {
-                    Toast toast = Toast.makeText(DetailsOnClient.this, getString(R.string.fill_all_message), Toast.LENGTH_LONG);
+                    Toast toast = Toast.makeText(DetailsOnClientActivity.this, getString(R.string.fill_all_message), Toast.LENGTH_LONG);
                     View view = toast.getView();
                     view.getBackground().setColorFilter(getResources().getColor(R.color.colorPrimary), PorterDuff.Mode.SRC_IN);
                     TextView text = view.findViewById(android.R.id.message);
@@ -264,7 +262,7 @@ public class DetailsOnClient extends AppCompatActivity implements NavigationView
                     getSharedPrefScreen(yourValTotal);
                     getSharedPrefRest(yourValMins);
 
-                    Intent intent = new Intent(DetailsOnClient.this, TimerActivity.class);
+                    Intent intent = new Intent(DetailsOnClientActivity.this, TimerActivity.class);
                     startActivity(intent);
                 }
                 break;

@@ -1,9 +1,9 @@
-package com.app.relaxeyes.ScreenOnePck;
+package com.app.relaxeyes.OthersPackage;
 
 import android.content.Context;
 import android.content.SharedPreferences;
 
-class PreferenceManager {
+public class PreferenceManager {
 
     SharedPreferences pref;
     SharedPreferences.Editor editor;
