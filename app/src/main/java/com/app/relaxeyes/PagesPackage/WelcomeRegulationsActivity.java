@@ -20,7 +20,7 @@ import android.widget.TextView;
 
 import com.app.relaxeyes.R;
 
-public class WelcomeActivityRegulations extends AppCompatActivity implements View.OnClickListener {
+public class WelcomeRegulationsActivity extends AppCompatActivity implements View.OnClickListener {
 
     private ViewPager viewPager;
     private MyViewPagerAdapter myViewPagerAdapter;
@@ -92,7 +92,7 @@ public class WelcomeActivityRegulations extends AppCompatActivity implements Vie
     }
 
     private void launchHomeScreen() {
-        startActivity(new Intent(WelcomeActivityRegulations.this, DetailsOnClientActivity.class));
+        startActivity(new Intent(WelcomeRegulationsActivity.this, DetailsOnClientActivity.class));
         finish();
     }
 

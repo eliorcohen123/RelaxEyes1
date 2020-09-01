@@ -116,7 +116,7 @@ public class DetailsOnClientActivity extends AppCompatActivity implements Naviga
         // Handle navigation view item clicks here.
         int id = item.getItemId();
         if (id == R.id.regulations) {
-            Intent intentTutorial = new Intent(DetailsOnClientActivity.this, WelcomeActivityRegulations.class);
+            Intent intentTutorial = new Intent(DetailsOnClientActivity.this, WelcomeRegulationsActivity.class);
             startActivity(intentTutorial);
         } else if (id == R.id.shareIntent) {
             Intent sendIntent = new Intent();
