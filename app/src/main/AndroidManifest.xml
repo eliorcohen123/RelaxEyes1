@@ -31,7 +31,7 @@
             android:name="com.app.relaxeyes.PagesPackage.TimerActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.app.relaxeyes.PagesPackage.WelcomeActivityRegulations"
+            android:name="com.app.relaxeyes.PagesPackage.WelcomeRegulationsActivity"
             android:screenOrientation="portrait" />
 
         <receiver
